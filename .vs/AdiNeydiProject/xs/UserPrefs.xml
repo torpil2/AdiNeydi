@@ -1,21 +1,38 @@
 ﻿<Properties StartupConfiguration="{D6D478A4-4B0E-48C6-B070-987C7CD45316}|https">
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.AdiNeydiProject PreferredExecutionTarget="/Applications/Opera GX.app" />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="AdiNeydiProject/Program.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="AdiNeydiProject/Controllers/HomeController.cs">
     <Files>
-      <File FileName="AdiNeydiProject/Program.cs" Line="1" Column="1" />
+      <File FileName="AdiNeydiProject/Views/Shared/_Layout.cshtml" />
+      <File FileName="AdiNeydiProject/wwwroot/css/site.css" />
+      <File FileName="AdiNeydiProject/Controllers/HomeController.cs" Line="103" Column="1" />
+      <File FileName="AdiNeydiProject/Views/Home/Index.cshtml" Line="106" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="AdiNeydiProject" expanded="True" selected="True" />
+          <Node name="AdiNeydiProject" expanded="True">
+            <Node name="AdiNeydiProject" expanded="True">
+              <Node name="Controllers" expanded="True" />
+              <Node name="CustomClasses" expanded="True" />
+              <Node name="DAL" expanded="True" />
+              <Node name="Views" expanded="True">
+                <Node name="Account" expanded="True" />
+                <Node name="Home" expanded="True" />
+                <Node name="Shared" expanded="True" />
+              </Node>
+              <Node name="Program.cs" selected="True" />
+            </Node>
+          </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.AdiNeydiProject PreferredExecutionTarget="/Applications/Opera GX.app" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/macbook/Documents/GitHub/AdiNeydi/AdiNeydiProject/Controllers/HomeController.cs" relfile="AdiNeydiProject/Controllers/HomeController.cs" line="103" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
 </Properties>

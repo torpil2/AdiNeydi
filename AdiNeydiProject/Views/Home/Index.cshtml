@@ -1,13 +1,396 @@
-﻿@{
+﻿@using AdiNeydiProject.DAL;
+@using Microsoft.AspNetCore.Http
+@using AdiNeydiProject.CustomClasses;
+@model dynamic
+@{
     ViewData["Title"] = "Home Page";
 }
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    function sendForm() {
+        const formElement = document.getElementById('PostYukleFormId');
+        var formData = new FormData(formElement);
+        const audioSrc = document.getElementById('player').src;
+        console.log(typeof audioSrc);
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", audioSrc);
+        xhr.responseType = "blob";
+        xhr.onload = function () {
+            var blobData = xhr.response;
+
+            //var formData = new FormData();
+            formData.append("audiofile", blobData, "recording.mp3");
+
+           
+
+            const request = new XMLHttpRequest();
+            request.open('POST', '/Home/PostYukle', true);
+            request.onreadystatechange = function () {
+                if (request.readyState === XMLHttpRequest.DONE && request.status === 200) {
+                    console.log('Ses dosyası ve form verileri sunucuya gönderildi.');
+                } else {
+                    console.error('Ses dosyası ve form verileri gönderme hatası: ' + request.statusText);
+                }
+            };
+            request.send(formData);
+        }
+        xhr.send();
+    }
+</script>
+
+<div class="sidebar">
+    <div class="sidebarRow ">
+       
+
+        <a class="btn btn-primary topelement" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+            <i class="fa-solid fa-filter"></i>
+            Filtrele
 
 
-<div id="MainPageContent">
+        </a>
+    </div>
+
+    <div class="collapse" id="collapseExample">
+
+        <a class="btn btn-info" data-toggle="collapse" href="#collapsefilter1" role="button" aria-expanded="false" aria-controls="collapsefilter1">
+            <i class="fa-solid fa-filter"></i>
+            Kategori Seç
 
 
-    DSeneme
+        </a>
+
+        <div class="sidebarRoww">
+            <div class="collapse" id="collapsefilter1">
 
 
- </div>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">Şarkı</label>
+                </div>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">Film</label>
+                </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">Kitap</label>
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <a class="btn btn-info" data-toggle="collapse" href="#collapsefilter2" role="button" aria-expanded="false" aria-controls="collapsefilter2">
+            <i class="fa-solid fa-filter"></i>
+            Gönderi Türü
+
+
+        </a>
+
+        <div class="sidebarRoww">
+            <div class="collapse" id="collapsefilter2">
+
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">Metin</label>
+                </div>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">Resimli</label>
+                </div>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">Sesli</label>
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+</div>
+<!-- sidebar ends -->
+<!-- feed starts -->
+<div class="feed">
+
+
+
+    <!-- message sender starts -->
+    <div class="messageSender">
+        <div class="messageSender__top">
+            <img class="user__avatar"
+                  src="~/rootimages/avatarpic.jpeg"
+                 alt="" />
+
+
+            <form name="PostYukleForm" class="yok" id="PostYukleFormId" enctype="multipart/form-data">
+
+                <input class="messageSender__input " id="descriptionfield" placeholder="Dilinin ucundaki şey..." name="description" type="text" />
+
+
+
+            </form>
+        </div>
+
+        <div class="messageSender__bottom">
+            <div class="messageSender__option">
+                <audio id="recorder" muted hidden></audio>
+
+
+
+                <button class="mic-btn" id="start">  <span class="icon"></span> </button>
+                <button class="stop-record-btn" id="stop"><span class="iconstop"></span></button>
+
+
+                <audio name="audiofile" id="player" controls>
+                </audio>
+
+            </div>
+
+            <style>
+                input[type=file]::file-selector-button {
+                    border: 2px solid #6c5ce7;
+                    padding: .2em .4em;
+                    border-radius: .2em;
+                    background-color: #a29bfe;
+                    transition: 1s;
+                    text-align: center;
+                    width: 50%;
+                }
+
+                    input[type=file]::file-selector-button:hover {
+                        background-color: #81ecec;
+                        border: 2px solid #00cec9;
+                    }
+
+                #kategoriselect {
+                    margin-left: 10px;
+                    margin-right: 5px;
+                    padding: 5px;
+                    border-radius: 6px;
+                }
+            </style>
+
+            <script>const recorder = document.getElementById('recorder');
+                const player = document.getElementById('player');
+
+                recorder.addEventListener('change', function (e) {
+                    const file = e.target.files[0];
+                    const url = URL.createObjectURL(file);
+                    // Do something with the audio file.
+                    player.src = url;
+                });</script>
+
+
+            <div class="messageSender__option">
+
+                @*@using (Html.BeginForm("UploadFile", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        <input type="file" name="file" />
+                        <button type="submit">Upload</button>
+                    }
+
+                    @if (ViewData["ImageUrl"] != null)
+                    {
+                        <img src="@ViewData["ImageUrl"]" />
+                    }*@
+                <input type="file" name="file" form="PostYukleFormId" />
+
+            </div>
+
+            <div class="messageSender__option">
+
+                <span style="color: orange" class="material-icons"> category </span>
+
+
+                <select id="kategoriselect" form="PostYukleFormId" name="CategoryId" aria-label="Default select example">
+                    <option selected>Kategori Seç</option>
+                    @foreach (Category item in Model.CategoryList)
+                    {
+
+                        <option value="@item.Id">@item.Name</option>
+
+                    }
+                </select>
+            </div>
+
+        </div>
+        <button id="paylasbtn" onclick="sendForm()" class="btn btn-primary" disabled>Paylaş</button>
+    </div>
+
+
+    <script>const input = document.getElementById('descriptionfield');
+
+        input.addEventListener('input', function () {
+            const minLength = 30;
+            const currentLength = this.value.length;
+            var paylasButton = document.getElementById("paylasbtn");
+            if (currentLength < minLength) {
+                paylasButton.disabled = true;
+                paylasButton.innerHTML = `En az ${minLength} karakter olmalı.`;
+
+            } else {
+                paylasButton.disabled = false;
+                paylasButton.innerHTML = 'Paylaş';
+
+            }
+        });</script>
+
+
+
+    <div id="postSection" class="postsection">
+        @foreach (Post item in Model.PostList)
+        {
+
+
+
+            <div class="post">
+
+                <div class="post__top">
+                    <img class="user__avatar post__avatar"
+                             src="~/rootimages/avatarpic.jpeg"
+                         alt="" />
+                    <div class="post__topInfo">
+                        <h3>Somanath Goudar</h3>
+                        <p>25 April at 20:30</p>
+                    </div>
+                </div>
+                <div class="post__top title">
+
+                    <h5>     @item.Title</h5>
+
+
+
+                </div>
+
+
+
+                <div class="post__bottom">
+                    <p>        @item.Description</p>
+                </div>
+
+                <div class="post__image">
+                    @foreach (var resim in Model.ResimList)
+                    {
+                        if (resim.Key == item.Id)
+                        {
+                            <img src="@resim.Value"
+                                 alt="" />
+                        }
+                        else
+                        {
+
+                        }
+
+                    }
+                </div>
+
+                <div class="post__options">
+                    <div class="post__option">
+                        <span class="material-icons"> thumb_up </span>
+                        <p>Like</p>
+                    </div>
+
+                    <div class="post__option">
+                        <span class="material-icons"> chat_bubble_outline </span>
+                        <p>Comment</p>
+                    </div>
+
+                    <div class="post__option">
+                        <span class="material-icons"> near_me </span>
+                        <p>Share</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <script>class VoiceRecorder {
+            constructor() {
+                if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                    console.log("getUserMedia supported")
+                } else {
+                    console.log("getUserMedia is not supported on your browser!")
+                }
+
+                this.mediaRecorder
+                this.stream
+                this.chunks = []
+                this.isRecording = false
+
+                this.recorderRef = document.querySelector("#recorder")
+                this.playerRef = document.querySelector("#player")
+                this.startRef = document.querySelector("#start")
+                this.stopRef = document.querySelector("#stop")
+
+                this.startRef.onclick = this.startRecording.bind(this)
+                this.stopRef.onclick = this.stopRecording.bind(this)
+
+                this.constraints = {
+                    audio: true,
+                    video: false
+                }
+
+            }
+
+            handleSuccess(stream) {
+                this.stream = stream
+                this.stream.oninactive = () => {
+                    console.log("Stream ended!")
+                };
+                this.recorderRef.srcObject = this.stream
+                this.mediaRecorder = new MediaRecorder(this.stream)
+                console.log(this.mediaRecorder)
+                this.mediaRecorder.ondataavailable = this.onMediaRecorderDataAvailable.bind(this)
+                this.mediaRecorder.onstop = this.onMediaRecorderStop.bind(this)
+                this.recorderRef.play()
+                this.mediaRecorder.start()
+            }
+
+            handleError(error) {
+                console.log("navigator.getUserMedia error: ", error)
+            }
+
+            onMediaRecorderDataAvailable(e) { this.chunks.push(e.data) }
+
+            onMediaRecorderStop(e) {
+
+                const blob = new Blob(this.chunks, { 'type': 'audio/mpeg; codecs=opus' })
+
+                const audioURL = window.URL.createObjectURL(blob)
+                this.playerRef.src = audioURL
+                this.chunks = []
+                this.stream.getAudioTracks().forEach(track => track.stop())
+                this.stream = null
+            }
+
+            startRecording() {
+                if (this.isRecording) return
+                this.isRecording = true
+                this.startRef.innerHTML = '<span class="iconrecording"></span>'
+                this.playerRef.src = ''
+                navigator.mediaDevices
+                    .getUserMedia(this.constraints)
+                    .then(this.handleSuccess.bind(this))
+                    .catch(this.handleError.bind(this))
+            }
+
+            stopRecording() {
+                if (!this.isRecording) return
+                this.isRecording = false
+                this.startRef.innerHTML = '<span class="icon"></span>'
+                this.recorderRef.pause()
+                this.mediaRecorder.stop()
+            }
+
+        }
+
+        window.voiceRecorder = new VoiceRecorder()</script>
+
+</div>

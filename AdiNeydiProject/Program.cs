@@ -1,8 +1,38 @@
-﻿var builder = WebApplication.CreateBuilder(args);
+using AdiNeydiProject.DAL;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Identity;
+using System;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using System.Configuration;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.AspNetCore.Authentication;
+
+
+var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+
+
+builder.Services.AddDbContext<PostgresContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<PostgresContext>();
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
+{
+    options.Cookie.Name = "adineydi.Auth";
+    options.LoginPath = "/Home/Index";
+    // options.AccessDeniedPath = "/Login/Index";
+});
+builder.Services.AddMvc().AddSessionStateTempDataProvider();
+builder.Services.AddSession();
+//builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddHttpContextAccessor();
 
 
 var app = builder.Build();

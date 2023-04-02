@@ -1,0 +1,238 @@
+@using AdiNeydiProject.DAL;
+@using Microsoft.AspNetCore.Http
+@using AdiNeydiProject.CustomClasses;
+@model dynamic
+@{
+    Layout = null;
+}
+
+@{
+
+
+foreach (Post item in Model.PostList)
+{bool ResimCheck = false;
+  foreach (var resim in Model.ResimList)
+  {  
+
+                 if (resim.Key == item.Id)
+                    {
+                        ResimCheck = true;
+                    }
+
+                 
+  }
+     if( ResimCheck == true)
+                    {       
+                        //RESİMLİ BLOG TEMPLATEİ KONULCAK
+                
+
+                        <div class="card"  style="width: 100%;border-radius:10px;margin:0.5em;">
+
+                                <div class="card-header" style="background-color:#1977F2;color:white;">
+                    <span style="float: left;">  
+                        @foreach (UserIndex user in Model.UserList)
+                        {
+                            @if (user.UserID == item.UserId)
+                            {
+                                @user.FirstName @user.LastName
+                            }
+                        }
+                    </span>
+                    <span style="float: right;">
+                        @if (item.CategoryId == 1)
+                        {
+                            <a><i class="fa-solid fa-film"></i> Film</a>    
+                        }
+                        else if (item.CategoryId == 2)
+                        {
+                            <a><i class="fa-solid fa-music"></i> Şarkı</a>
+                        }
+                        else
+                        {
+                            <a><i class="fa-solid fa-globe"></i> Konu Dışı</a>
+                        }
+
+                        
+                    </span>
+                </div>
+
+
+
+
+                     @foreach (var resim in Model.ResimList)
+                        {
+                            if (resim.Key == item.Id)
+                            {
+                                
+                            <img class="card-img-top" src="@resim.Value" style="width:60%;height:auto;margin: 0 auto;" alt="Card image cap">
+                                     
+                            }
+                            else
+                            {
+
+                            }
+
+                        } 
+
+                   
+                    <div class="card-body" style="padding: 0;">
+                        <hr>
+                        <p class="card-text" style="margin:10px;">  @if (item.Description.Length > 150)
+                            {@(item.Description.Substring(0, 150)) @Html.Raw("...") }
+                        else
+                        {@item.Description}</p>
+
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item" style="margin:0 auto;"> 
+                                
+                                           
+                    @foreach (var postaudio in Model.AudioList)
+                    {
+                        @if (postaudio.Key == item.Id)
+                        {
+                               
+                            
+                                    <audio controls>
+                                        <source src="@postaudio.Value" type="audio/mp3" />
+                                    </audio>
+                                  
+                               
+
+                        }
+                        else
+                        {
+                        }
+                    }
+                                                        
+                                                        
+                                                        </li>
+
+
+
+
+                  
+                    
+                    </ul>
+                    </div>
+                    </div>
+   
+
+                    }
+                    else if(ResimCheck == false)
+                    {
+                        //SADECE METİN OLAN TEMPLATE KONULCAK
+                         <a href="/Home/Postdetails/@item.Id" class="link">
+                <div class="post">
+
+                    <div class="post__top">
+                        <img class="user__avatar post__avatar"
+                             src="~/rootimages/avatarpic.jpeg"
+                             alt="" />
+                        <div class="post__topInfo">
+                            @foreach (UserIndex user in Model.UserList)
+                            {
+                                @if (user.UserID == item.UserId)
+                                {
+                                    <h3>@user.FirstName @user.LastName</h3>
+                                }
+                            }
+                        </div>
+                        <div class="post__topDate">
+                            <p>25 April at 20:30</p>
+                            @if (item.CategoryId == 1)
+                            {
+                                <p><i class="fa-solid fa-film"></i> Film</p>
+                            }
+                            else if (item.CategoryId == 2)
+                            {
+                                <p><i class="fa-solid fa-music"></i> Şarkı</p>
+                            }
+                            else
+                            {
+                                <p><i class="fa-solid fa-globe"></i> Konu Dışı</p>
+
+                            }
+                        </div>
+
+                    </div>
+
+
+                    <div class="post__bottom">
+
+                        <p>
+                            @if (item.Description.Length > 150)
+                            {@(item.Description.Substring(0, 150)) @Html.Raw("...") }
+                        else
+                        {@item.Description}
+                        </p>
+
+
+
+
+
+                    </div>
+
+
+                    <div class="post__image">
+                        @foreach (var resim in Model.ResimList)
+                        {
+                            if (resim.Key == item.Id)
+                            {
+                                <img src="@resim.Value"
+                                     alt="" />
+                            }
+                            else
+                            {
+
+                            }
+
+                        }
+                    </div>
+                    @foreach (var postaudio in Model.AudioList)
+                    {
+                        @if (postaudio.Key == item.Id)
+                        {
+                            <div class="post__options">
+
+                                <div class="post__option">
+
+                                    <audio controls>
+                                        <source src="@postaudio.Value" type="audio/mp3" />
+                                    </audio>
+
+                                </div>
+
+
+                            </div>
+                        }
+                        else
+                        {
+                        }
+                    }
+                </div>
+            </a>
+                      
+                   
+                    }
+  }
+}
+
+
+<script>
+  $(document).ready(function() {
+    if ($("body").hasClass("dark-mode")) {
+      $(".post__bottom, .post__options, .post__image , .card , .list-group-item , .card-text, .postsection , .header ,.post__top, .card-header").addClass("dark-mode");
+    }
+  });
+</script>
+
+
+
+
+
+
+
+
+
+
+

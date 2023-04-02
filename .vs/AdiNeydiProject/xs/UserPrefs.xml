@@ -1,46 +1,23 @@
-﻿<Properties StartupConfiguration="{D6D478A4-4B0E-48C6-B070-987C7CD45316}|https">
-  <MonoDevelop.Ide.Workbench ActiveDocument="AdiNeydiProject/Controllers/AccountController.cs">
-    <Files>
-      <File FileName="AdiNeydiProject/Controllers/HomeController.cs" Line="103" Column="1" />
-      <File FileName="AdiNeydiProject/Views/Home/Index.cshtml" Line="47" Column="11" />
-      <File FileName="AdiNeydiProject/Controllers/AccountController.cs" Line="107" Column="1" />
-      <File FileName="AdiNeydiProject/Program.cs" Line="26" Column="24" />
-      <File FileName="AdiNeydiProject/Views/Shared/_Layout.cshtml" Line="68" Column="107" />
-      <File FileName="AdiNeydiProject/wwwroot/css/site.css" Line="605" Column="33" />
-      <File FileName="AdiNeydiProject/appsettings.json" Line="12" Column="13" />
-    </Files>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State name="__root__">
-          <Node name="AdiNeydiProject" expanded="True">
-            <Node name="AdiNeydiProject" expanded="True">
-              <Node name="Controllers" expanded="True" />
-              <Node name="CustomClasses" expanded="True" />
-              <Node name="DAL" expanded="True" />
-              <Node name="Views" expanded="True">
-                <Node name="Account" expanded="True" />
-                <Node name="Home" expanded="True" />
-                <Node name="Shared" expanded="True" />
-              </Node>
-              <Node name="wwwroot" expanded="True">
-                <Node name="css" expanded="True" />
-                <Node name="rootimages" expanded="True" />
-              </Node>
-            </Node>
-          </Node>
-        </State>
-      </Pad>
-    </Pads>
-  </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+﻿<Properties StartupConfiguration="{D6D478A4-4B0E-48C6-B070-987C7CD45316}|https" NuGet.AddPackagesDialog.IncludePrerelease="True">
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.AdiNeydiProject PreferredExecutionTarget="/Applications/Opera GX.app" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="/Users/macbook/Documents/GitHub/AdiNeydi/AdiNeydiProject/Controllers/AccountController.cs" relfile="AdiNeydiProject/Controllers/AccountController.cs" line="43" column="1" />
-      <Breakpoint file="/Users/macbook/Documents/GitHub/AdiNeydi/AdiNeydiProject/Controllers/AccountController.cs" relfile="AdiNeydiProject/Controllers/AccountController.cs" line="119" column="1" />
-      <Breakpoint file="/Users/macbook/Documents/GitHub/AdiNeydi/AdiNeydiProject/Controllers/AccountController.cs" relfile="AdiNeydiProject/Controllers/AccountController.cs" line="107" column="1" />
-    </BreakpointStore>
+    <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.AdiNeydiProject PreferredExecutionTarget="/Applications/Opera GX.app" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workbench ActiveDocument="AdiNeydiProject/wwwroot/css/site.css">
+    <Files>
+      <File FileName="AdiNeydiProject/Controllers/HomeController.cs" />
+      <File FileName="AdiNeydiProject/Views/Shared/_Layout.cshtml" />
+      <File FileName="AdiNeydiProject/Views/Home/Postdetails.cshtml" />
+      <File FileName="AdiNeydiProject/wwwroot/css/Productdetails.css" />
+      <File FileName="AdiNeydiProject/wwwroot/css/UserDetails.css" />
+      <File FileName="AdiNeydiProject/Program.cs" />
+      <File FileName="AdiNeydiProject/wwwroot/css/site.css" Line="339" Column="30" />
+      <File FileName="AdiNeydiProject/Views/Home/Index.cshtml" />
+      <File FileName="AdiNeydiProject/Views/Home/GetMoreData.cshtml" />
+      <File FileName="AdiNeydiProject/Controllers/AccountController.cs" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
 </Properties>

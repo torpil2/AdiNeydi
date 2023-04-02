@@ -18,4 +18,6 @@ public partial class Post
     public int? UserId { get; set; }
 
     public string? IsApproved { get; set; }
+
+    public DateTime? CreatedTime { get; set; }
 }

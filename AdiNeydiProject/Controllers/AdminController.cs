@@ -21,7 +21,17 @@ namespace AdiNeydiProject.Controllers
         {
             _context = context;
         }
+
+        public IActionResult Login()
+        {
+            
+            return View();
+        }
+
+       
         // GET: /<controller>/
+
+            
         public IActionResult Index()
         {
             dynamic model = new ExpandoObject();

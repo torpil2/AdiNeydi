@@ -37,12 +37,12 @@ namespace AdiNeydiProject.Controllers
         }
 
         
-
+        [ValidateAntiForgeryToken]
         [HttpPost]
         public async Task<IActionResult> Login(string txtUserName, string txtPassword)
         {
 
-            PostgresContext db = new PostgresContext();
+            // PostgresContext db = new PostgresContext();
 
             string passwordform = txtPassword;
             byte[] salt = Encoding.ASCII.GetBytes("440355d96220b9aa3829a5816257140b"); // Tuzlama için rastgele bir değer belirleyin
@@ -51,6 +51,16 @@ namespace AdiNeydiProject.Controllers
 
             var userget = _database.Users.Where(x => x.UserName == txtUserName && x.PasswordHash == LoginPasshash).FirstOrDefault();
             var usertype = _database.UserTypes.Where(x => x.Id == userget.UserTypeId).FirstOrDefault();
+              string UsertypeName;
+            if(usertype==null)
+            {
+             UsertypeName = "Rolsüz";
+            }
+            else
+            {
+             UsertypeName = usertype.Name;
+
+            }
             if (userget != null)
             {
                 var newclaims = new Claim[]
@@ -59,12 +69,18 @@ namespace AdiNeydiProject.Controllers
                     new Claim(JwtRegisteredClaimNames.NameId,Guid.NewGuid().ToString()),
                     new Claim(ClaimTypes.Name, userget.UserName),
                     new Claim ("UserMail",userget.Email),
-                    new Claim("UserId",userget.Id.ToString()),
+                    new Claim("UserId",userget.Id.ToString()),                   
+                    new Claim("Role", usertype.Name ),
+                    
+                    
                     //new Claim("UserType", usertype.Name)
 
-
+            
+       
 
             };
+
+
                 SecurityKey securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("evlerkiralik1234"));
                 var token = new JwtSecurityToken(
                     issuer: "evlerkiralik.com",
@@ -101,7 +117,7 @@ namespace AdiNeydiProject.Controllers
         {
             return View();
         }
-
+         [ValidateAntiForgeryToken]
         [HttpPost]
         public async Task<IActionResult> LogoutAct()
         {
@@ -117,10 +133,14 @@ namespace AdiNeydiProject.Controllers
         public async Task<IActionResult> Register(string FirstName , string LastName,string username, string email, string password)
         {
             User newuser = new User();
+            UserType UserTypeId = _database.UserTypes.Where(x=>x.Name == "User").FirstOrDefault();
+           
             newuser.UserName = username;
             newuser.Email = email;
             newuser.FirstName = FirstName;
             newuser.LastName = LastName;
+            newuser.UserTypeId = UserTypeId.Id;
+            
             string passwordform = password;
             byte[] salt = Encoding.ASCII.GetBytes("440355d96220b9aa3829a5816257140b"); // Tuzlama için rastgele bir değer belirleyin
             var rfc2898DeriveBytes = new Rfc2898DeriveBytes(password, salt, 10000); // 10000 iterasyonla hashleme yap

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "XiH8Qh/ZI80TS5k4gSN5UnVFBczDAMbhwtENsP3kOls=",
+  "Hash": "25DGyy89v8KXfnow6TxEOqhlUyN6EkeJCn1d3MtQfTE=",
   "Source": "AdiNeydiProject",
   "BasePath": "_content/AdiNeydiProject",
   "Mode": "Default",
@@ -1802,6 +1802,40 @@
       "OriginalItemSpec": "wwwroot/.DS_Store"
     },
     {
+      "Identity": "/Users/macbook/Documents/GitHub/AdiNeydi/AdiNeydiProject/wwwroot/css/Admincss/Loginpage.css",
+      "SourceId": "AdiNeydiProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/macbook/Documents/GitHub/AdiNeydi/AdiNeydiProject/wwwroot/",
+      "BasePath": "_content/AdiNeydiProject",
+      "RelativePath": "css/Admincss/Loginpage.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/css/Admincss/Loginpage.css"
+    },
+    {
+      "Identity": "/Users/macbook/Documents/GitHub/AdiNeydi/AdiNeydiProject/wwwroot/css/Productdetails.css",
+      "SourceId": "AdiNeydiProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/macbook/Documents/GitHub/AdiNeydi/AdiNeydiProject/wwwroot/",
+      "BasePath": "_content/AdiNeydiProject",
+      "RelativePath": "css/Productdetails.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/css/Productdetails.css"
+    },
+    {
       "Identity": "/Users/macbook/Documents/GitHub/AdiNeydi/AdiNeydiProject/wwwroot/css/site.css",
       "SourceId": "AdiNeydiProject",
       "SourceType": "Discovered",
@@ -1819,6 +1853,23 @@
       "OriginalItemSpec": "wwwroot/css/site.css"
     },
     {
+      "Identity": "/Users/macbook/Documents/GitHub/AdiNeydi/AdiNeydiProject/wwwroot/css/UserDetails.css",
+      "SourceId": "AdiNeydiProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/macbook/Documents/GitHub/AdiNeydi/AdiNeydiProject/wwwroot/",
+      "BasePath": "_content/AdiNeydiProject",
+      "RelativePath": "css/UserDetails.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/css/UserDetails.css"
+    },
+    {
       "Identity": "/Users/macbook/Documents/GitHub/AdiNeydi/AdiNeydiProject/wwwroot/favicon.ico",
       "SourceId": "AdiNeydiProject",
       "SourceType": "Discovered",
@@ -1834,6 +1885,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/favicon.ico"
+    },
+    {
+      "Identity": "/Users/macbook/Documents/GitHub/AdiNeydi/AdiNeydiProject/wwwroot/js/adminloging.js",
+      "SourceId": "AdiNeydiProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/macbook/Documents/GitHub/AdiNeydi/AdiNeydiProject/wwwroot/",
+      "BasePath": "_content/AdiNeydiProject",
+      "RelativePath": "js/adminloging.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/js/adminloging.js"
     },
     {
       "Identity": "/Users/macbook/Documents/GitHub/AdiNeydi/AdiNeydiProject/wwwroot/js/site.js",
@@ -2822,6 +2890,57 @@
       "OriginalItemSpec": "wwwroot/lib/jquery/LICENSE.txt"
     },
     {
+      "Identity": "/Users/macbook/Documents/GitHub/AdiNeydi/AdiNeydiProject/wwwroot/rootimages/.DS_Store",
+      "SourceId": "AdiNeydiProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/macbook/Documents/GitHub/AdiNeydi/AdiNeydiProject/wwwroot/",
+      "BasePath": "_content/AdiNeydiProject",
+      "RelativePath": "rootimages/.DS_Store",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/rootimages/.DS_Store"
+    },
+    {
+      "Identity": "/Users/macbook/Documents/GitHub/AdiNeydi/AdiNeydiProject/wwwroot/rootimages/adineydilogo.png",
+      "SourceId": "AdiNeydiProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/macbook/Documents/GitHub/AdiNeydi/AdiNeydiProject/wwwroot/",
+      "BasePath": "_content/AdiNeydiProject",
+      "RelativePath": "rootimages/adineydilogo.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/rootimages/adineydilogo.png"
+    },
+    {
+      "Identity": "/Users/macbook/Documents/GitHub/AdiNeydi/AdiNeydiProject/wwwroot/rootimages/adineydilogokufuk.png",
+      "SourceId": "AdiNeydiProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/macbook/Documents/GitHub/AdiNeydi/AdiNeydiProject/wwwroot/",
+      "BasePath": "_content/AdiNeydiProject",
+      "RelativePath": "rootimages/adineydilogokufuk.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/rootimages/adineydilogokufuk.png"
+    },
+    {
       "Identity": "/Users/macbook/Documents/GitHub/AdiNeydi/AdiNeydiProject/wwwroot/rootimages/avatarpic.jpeg",
       "SourceId": "AdiNeydiProject",
       "SourceType": "Discovered",
@@ -2837,6 +2956,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/rootimages/avatarpic.jpeg"
+    },
+    {
+      "Identity": "/Users/macbook/Documents/GitHub/AdiNeydi/AdiNeydiProject/wwwroot/rootimages/MusicPost.png",
+      "SourceId": "AdiNeydiProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/macbook/Documents/GitHub/AdiNeydi/AdiNeydiProject/wwwroot/",
+      "BasePath": "_content/AdiNeydiProject",
+      "RelativePath": "rootimages/MusicPost.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/rootimages/MusicPost.png"
     }
   ]
 }

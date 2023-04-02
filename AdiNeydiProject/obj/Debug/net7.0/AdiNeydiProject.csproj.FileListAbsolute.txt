@@ -934,3 +934,5 @@
 /Users/macbook/Documents/GitHub/AdiNeydi/AdiNeydiProject/bin/Debug/net7.0/Microsoft.IdentityModel.Logging.dll
 /Users/macbook/Documents/GitHub/AdiNeydi/AdiNeydiProject/bin/Debug/net7.0/Microsoft.IdentityModel.Tokens.dll
 /Users/macbook/Documents/GitHub/AdiNeydi/AdiNeydiProject/bin/Debug/net7.0/System.IdentityModel.Tokens.Jwt.dll
+/Users/macbook/Documents/GitHub/AdiNeydi/AdiNeydiProject/bin/Debug/net7.0/Microsoft.AspNetCore.JsonPatch.dll
+/Users/macbook/Documents/GitHub/AdiNeydi/AdiNeydiProject/bin/Debug/net7.0/Newtonsoft.Json.Bson.dll

@@ -26,4 +26,6 @@ public partial class User
     public string? IsPhoneVerificated { get; set; }
 
     public byte[]? PasswordHash { get; set; }
+
+    public DateOnly? CreatedTime { get; set; }
 }

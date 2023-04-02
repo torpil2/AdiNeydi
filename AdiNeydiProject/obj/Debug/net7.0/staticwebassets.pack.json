@@ -181,12 +181,28 @@
       "PackagePath": "staticwebassets/.DS_Store"
     },
     {
+      "Id": "/Users/macbook/Documents/GitHub/AdiNeydi/AdiNeydiProject/wwwroot/css/Admincss/Loginpage.css",
+      "PackagePath": "staticwebassets/css/Admincss/Loginpage.css"
+    },
+    {
+      "Id": "/Users/macbook/Documents/GitHub/AdiNeydi/AdiNeydiProject/wwwroot/css/Productdetails.css",
+      "PackagePath": "staticwebassets/css/Productdetails.css"
+    },
+    {
+      "Id": "/Users/macbook/Documents/GitHub/AdiNeydi/AdiNeydiProject/wwwroot/css/UserDetails.css",
+      "PackagePath": "staticwebassets/css/UserDetails.css"
+    },
+    {
       "Id": "/Users/macbook/Documents/GitHub/AdiNeydi/AdiNeydiProject/wwwroot/css/site.css",
       "PackagePath": "staticwebassets/css/site.css"
     },
     {
       "Id": "/Users/macbook/Documents/GitHub/AdiNeydi/AdiNeydiProject/wwwroot/favicon.ico",
       "PackagePath": "staticwebassets/favicon.ico"
+    },
+    {
+      "Id": "/Users/macbook/Documents/GitHub/AdiNeydi/AdiNeydiProject/wwwroot/js/adminloging.js",
+      "PackagePath": "staticwebassets/js/adminloging.js"
     },
     {
       "Id": "/Users/macbook/Documents/GitHub/AdiNeydi/AdiNeydiProject/wwwroot/js/site.js",
@@ -419,6 +435,22 @@
     {
       "Id": "/Users/macbook/Documents/GitHub/AdiNeydi/AdiNeydiProject/wwwroot/lib/jquery/dist/jquery.min.map",
       "PackagePath": "staticwebassets/lib/jquery/dist/jquery.min.map"
+    },
+    {
+      "Id": "/Users/macbook/Documents/GitHub/AdiNeydi/AdiNeydiProject/wwwroot/rootimages/.DS_Store",
+      "PackagePath": "staticwebassets/rootimages/.DS_Store"
+    },
+    {
+      "Id": "/Users/macbook/Documents/GitHub/AdiNeydi/AdiNeydiProject/wwwroot/rootimages/MusicPost.png",
+      "PackagePath": "staticwebassets/rootimages/MusicPost.png"
+    },
+    {
+      "Id": "/Users/macbook/Documents/GitHub/AdiNeydi/AdiNeydiProject/wwwroot/rootimages/adineydilogo.png",
+      "PackagePath": "staticwebassets/rootimages/adineydilogo.png"
+    },
+    {
+      "Id": "/Users/macbook/Documents/GitHub/AdiNeydi/AdiNeydiProject/wwwroot/rootimages/adineydilogokufuk.png",
+      "PackagePath": "staticwebassets/rootimages/adineydilogokufuk.png"
     },
     {
       "Id": "/Users/macbook/Documents/GitHub/AdiNeydi/AdiNeydiProject/wwwroot/rootimages/avatarpic.jpeg",

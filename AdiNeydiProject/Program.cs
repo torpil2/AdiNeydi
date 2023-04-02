@@ -24,15 +24,30 @@ builder.Services.AddDbContext<PostgresContext>(options =>
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<PostgresContext>();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
+
+
 {
     options.Cookie.Name = "adineydi.Auth";
     options.LoginPath = "/Home/Index";
     // options.AccessDeniedPath = "/Login/Index";
 });
+
+builder.Services.AddAuthorization(options =>
+    {
+        options.AddPolicy("Admin",
+             policy => policy.RequireClaim("Role","Admin","Moderator"));
+    });
+
 builder.Services.AddMvc().AddSessionStateTempDataProvider();
 builder.Services.AddSession();
 //builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddHttpContextAccessor();
+
+
+
+
+
+
 
 
 var app = builder.Build();

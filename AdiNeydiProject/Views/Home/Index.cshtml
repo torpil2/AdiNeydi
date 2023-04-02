@@ -7,42 +7,15 @@
 }
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script>
-    function sendForm() {
-        const formElement = document.getElementById('PostYukleFormId');
-        var formData = new FormData(formElement);
-        const audioSrc = document.getElementById('player').src;
-        console.log(typeof audioSrc);
 
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", audioSrc);
-        xhr.responseType = "blob";
-        xhr.onload = function () {
-            var blobData = xhr.response;
 
-            //var formData = new FormData();
-            formData.append("audiofile", blobData, "recording.mp3");
 
-           
 
-            const request = new XMLHttpRequest();
-            request.open('POST', '/Home/PostYukle', true);
-            request.onreadystatechange = function () {
-                if (request.readyState === XMLHttpRequest.DONE && request.status === 200) {
-                    console.log('Ses dosyası ve form verileri sunucuya gönderildi.');
-                } else {
-                    console.error('Ses dosyası ve form verileri gönderme hatası: ' + request.statusText);
-                }
-            };
-            request.send(formData);
-        }
-        xhr.send();
-    }
-</script>
+
 
 <div class="sidebar">
     <div class="sidebarRow ">
-       
+
 
         <a class="btn btn-primary topelement" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
             <i class="fa-solid fa-filter"></i>
@@ -64,24 +37,21 @@
         <div class="sidebarRoww">
             <div class="collapse" id="collapsefilter1">
 
+                @foreach (Category catfilt in Model.CategoryList)
+                {
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" onchange="RemoveFromCategorylist(this)" value="@catfilt.Id" type="checkbox" id="CategoryCheckBox" checked>
+                        <label class="form-check-label" for="flexSwitchCheckDefault">@catfilt.Name</label>
+                    </div>
+                }
 
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                    <label class="form-check-label" for="flexSwitchCheckDefault">Şarkı</label>
-                </div>
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                    <label class="form-check-label" for="flexSwitchCheckDefault">Film</label>
-                </div>
-                  <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                    <label class="form-check-label" for="flexSwitchCheckDefault">Kitap</label>
-                </div>
 
 
             </div>
 
         </div>
+
+
 
 
         <a class="btn btn-info" data-toggle="collapse" href="#collapsefilter2" role="button" aria-expanded="false" aria-controls="collapsefilter2">
@@ -94,24 +64,25 @@
         <div class="sidebarRoww">
             <div class="collapse" id="collapsefilter2">
 
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                    <label class="form-check-label" for="flexSwitchCheckDefault">Metin</label>
-                </div>
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                    <label class="form-check-label" for="flexSwitchCheckDefault">Resimli</label>
-                </div>
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                    <label class="form-check-label" for="flexSwitchCheckDefault">Sesli</label>
-                </div>
+                @foreach (AdiNeydiProject.DAL.Type typefilt in Model.TypeList)
+                {
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" onchange="RemoveFromTypelist(this)" value="@typefilt.Id" type="checkbox" id="TypeCheckBox" checked>
+                        <label class="form-check-label" for="flexSwitchCheckDefault">@typefilt.Name</label>
+                    </div>
+                }
+
+
 
             </div>
 
         </div>
 
 
+        <script>
+           
+
+        </script>
 
     </div>
 
@@ -122,16 +93,17 @@
 
 
 
+
     <!-- message sender starts -->
     <div class="messageSender">
         <div class="messageSender__top">
             <img class="user__avatar"
-                  src="~/rootimages/avatarpic.jpeg"
+                 src="~/rootimages/avatarpic.jpeg"
                  alt="" />
 
 
-            <form name="PostYukleForm" class="yok" id="PostYukleFormId" enctype="multipart/form-data">
-
+            <form name="PostYukleForm" action="/Home/PostYukle" class="yok" id="PostYukleFormId" enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
                 <input class="messageSender__input " id="descriptionfield" placeholder="Dilinin ucundaki şey..." name="description" type="text" />
 
 
@@ -155,27 +127,6 @@
             </div>
 
             <style>
-                input[type=file]::file-selector-button {
-                    border: 2px solid #6c5ce7;
-                    padding: .2em .4em;
-                    border-radius: .2em;
-                    background-color: #a29bfe;
-                    transition: 1s;
-                    text-align: center;
-                    width: 50%;
-                }
-
-                    input[type=file]::file-selector-button:hover {
-                        background-color: #81ecec;
-                        border: 2px solid #00cec9;
-                    }
-
-                #kategoriselect {
-                    margin-left: 10px;
-                    margin-right: 5px;
-                    padding: 5px;
-                    border-radius: 6px;
-                }
             </style>
 
             <script>const recorder = document.getElementById('recorder');
@@ -201,7 +152,7 @@
                     {
                         <img src="@ViewData["ImageUrl"]" />
                     }*@
-                <input type="file" name="file" form="PostYukleFormId" />
+                <input type="file" name="file" form="PostYukleFormId" accept="image/png, image/jpeg , image/jpg" />
 
             </div>
 
@@ -222,8 +173,9 @@
             </div>
 
         </div>
-        <button id="paylasbtn" onclick="sendForm()" class="btn btn-primary" disabled>Paylaş</button>
+        <button id="paylasbtn" class="btn btn-primary" disabled>Paylaş</button>
     </div>
+    <div style="visibility:hidden !important;" class="lds-roller" id="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
 
 
     <script>const input = document.getElementById('descriptionfield');
@@ -244,73 +196,426 @@
         });</script>
 
 
+    <div style="visibility:hidden" class="lds-ring" id="lds-ring"><div></div><div></div><div></div><div></div></div>
 
+    <div style="visibility:hidden !important;" id="lds-grid" class="lds-grid"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
     <div id="postSection" class="postsection">
-        @foreach (Post item in Model.PostList)
-        {
 
 
-
-            <div class="post">
-
-                <div class="post__top">
-                    <img class="user__avatar post__avatar"
-                             src="~/rootimages/avatarpic.jpeg"
-                         alt="" />
-                    <div class="post__topInfo">
-                        <h3>Somanath Goudar</h3>
-                        <p>25 April at 20:30</p>
-                    </div>
-                </div>
-                <div class="post__top title">
-
-                    <h5>     @item.Title</h5>
+@{
 
 
+foreach (Post item in Model.PostList)
+{bool ResimCheck = false;
+  foreach (var resim in Model.ResimList)
+  {  
 
-                </div>
-
-
-
-                <div class="post__bottom">
-                    <p>        @item.Description</p>
-                </div>
-
-                <div class="post__image">
-                    @foreach (var resim in Model.ResimList)
+                 if (resim.Key == item.Id)
                     {
-                        if (resim.Key == item.Id)
+                        ResimCheck = true;
+                    }
+
+                 
+  }
+     if( ResimCheck == true)
+                    {       
+                        //RESİMLİ BLOG TEMPLATEİ KONULCAK
+                
+
+                        <div class="card"  style="width: 100%;border-radius:10px;margin:0.5em;">
+
+                                <div class="card-header" style="background-color:#1977F2;color:white;">
+                    <span style="float: left;">  <img class="card-header-img" src="~/rootimages/avatarpic.jpeg" >
+                        @foreach (UserIndex user in Model.UserList)
                         {
-                            <img src="@resim.Value"
-                                 alt="" />
+                            @if (user.UserID == item.UserId)
+                            {
+                                @user.FirstName @user.LastName
+                            }
+                        }
+                    </span>
+                    <span style="float: right;">
+                        @if (item.CategoryId == 1)
+                        {
+                            <a><i class="fa-solid fa-film"></i> Film</a>    
+                        }
+                        else if (item.CategoryId == 2)
+                        {
+                            <a><i class="fa-solid fa-music"></i> Şarkı</a>
                         }
                         else
                         {
-
+                            <a><i class="fa-solid fa-globe"></i> Konu Dışı</a>
                         }
 
+                        
+                    </span>
+                </div>
+
+
+
+
+                     @foreach (var resim in Model.ResimList)
+                        {
+                            if (resim.Key == item.Id)
+                            {
+                                
+                            <img class="card-img-top" src="@resim.Value" style="width:60%;height:auto;margin: 0 auto;" alt="Card image cap">
+                                     
+                            }
+                            else
+                            {
+
+                            }
+
+                        } 
+
+                   
+                    <div class="card-body" style="padding: 0;">
+                        <hr>
+                        <p class="card-text" style="margin:10px;">  @if (item.Description.Length > 150)
+                            {@(item.Description.Substring(0, 150)) @Html.Raw("...") }
+                        else
+                        {@item.Description}</p>
+
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item" style="margin:0 auto;"> 
+                                
+                                           
+                    @foreach (var postaudio in Model.AudioList)
+                    {
+                        @if (postaudio.Key == item.Id)
+                        {
+                               
+                            
+                                    <audio controls>
+                                        <source src="@postaudio.Value" type="audio/mp3" />
+                                    </audio>
+                                  
+                               
+
+                        }
+                        else
+                        {
+                        }
+                    }
+                                                        
+                                                        
+                                                        </li>
+
+
+
+
+                  
+                    
+                    </ul>
+                    </div>
+                    </div>
+   
+
+                    }
+                    else if(ResimCheck == false)
+                    {
+                        //SADECE METİN OLAN TEMPLATE KONULCAK
+                         <a href="/Home/Postdetails/@item.Id" class="link">
+                <div class="post">
+
+                    <div class="post__top">
+                        <img class="user__avatar post__avatar"
+                             src="~/rootimages/avatarpic.jpeg"
+                             alt="" />
+                        <div class="post__topInfo">
+                            @foreach (UserIndex user in Model.UserList)
+                            {
+                                @if (user.UserID == item.UserId)
+                                {
+                                    <h3>@user.FirstName @user.LastName</h3>
+                                }
+                            }
+                        </div>
+                        <div class="post__topDate">
+                            <p>25 April at 20:30</p>
+                            @if (item.CategoryId == 1)
+                            {
+                                <a><i class="fa-solid fa-film"></i> Film</a>
+                            }
+                            else if (item.CategoryId == 2)
+                            {
+                                <a><i class="fa-solid fa-music"></i> Şarkı</a>
+                            }
+                            else
+                            {
+                                <a><i class="fa-solid fa-globe"></i> Konu Dışı</a>
+
+                            }
+                        </div>
+
+                    </div>
+
+
+                    <div class="post__bottom">
+
+                        <p>
+                            @if (item.Description.Length > 150)
+                            {@(item.Description.Substring(0, 150)) @Html.Raw("...") }
+                        else
+                        {@item.Description}
+                        </p>
+
+
+
+
+
+                    </div>
+
+
+                    <div class="post__image">
+                        @foreach (var resim in Model.ResimList)
+                        {
+                            if (resim.Key == item.Id)
+                            {
+                                <img src="@resim.Value"
+                                     alt="" />
+                            }
+                            else
+                            {
+
+                            }
+
+                        }
+                    </div>
+                    @foreach (var postaudio in Model.AudioList)
+                    {
+                        @if (postaudio.Key == item.Id)
+                        {
+                            <div class="post__options">
+
+                                <div class="post__option">
+
+                                    <audio controls>
+                                        <source src="@postaudio.Value" type="audio/mp3" />
+                                    </audio>
+
+                                </div>
+
+
+                            </div>
+                        }
+                        else
+                        {
+                        }
                     }
                 </div>
+            </a>
+                      
+                   
+                    }
+  }
+}
+    
 
-                <div class="post__options">
-                    <div class="post__option">
-                        <span class="material-icons"> thumb_up </span>
-                        <p>Like</p>
-                    </div>
-
-                    <div class="post__option">
-                        <span class="material-icons"> chat_bubble_outline </span>
-                        <p>Comment</p>
-                    </div>
-
-                    <div class="post__option">
-                        <span class="material-icons"> near_me </span>
-                        <p>Share</p>
-                    </div>
-                </div>
-            </div>
-        }
     </div>
+
+
+
+    <script>
+
+
+       
+
+
+
+
+        //COLOR TEME  END
+
+
+        let pageIndex = 10;
+
+        const TypeList = []; // boş bir dizi oluşturun
+        const CategoryList = [];
+        // form elemanını seçin ve içindeki checkbox elemanlarını alın
+        const Typecheckboxes = document.querySelectorAll('#TypeCheckBox');
+        const Categorycheckboxes = document.querySelectorAll('#CategoryCheckBox');
+
+
+        // checkbox elemanlarını döngü ile kontrol edin
+        Typecheckboxes.forEach((checkbox) => {
+            if (checkbox.checked) { // eğer checkbox seçiliyse
+                TypeList.push(checkbox.value); // seçilen değeri diziye ekleyin
+            }
+        });
+
+        console.log(TypeList);
+
+
+        Categorycheckboxes.forEach((checkbox) => {
+            if (checkbox.checked) { // eğer checkbox seçiliyse
+                CategoryList.push(checkbox.value); // seçilen değeri diziye ekleyin
+            }
+        });
+
+        console.log(CategoryList);
+
+
+
+        function RemoveFromTypelist(checkbox) {
+            const value = checkbox.value;
+            if (checkbox.checked) {
+                if (!TypeList.includes(value)) {
+                    TypeList.push(value);
+                    console.log("Array'e eklendi: " + value);
+                    GetFilteredData();
+                    let pageIndex = 5;
+
+                }
+            } else {
+                const index = TypeList.indexOf(value);
+                if (index !== -1) {
+                    TypeList.splice(index, 1);
+                    console.log("Array'den çıkarıldı: " + value);
+                    GetFilteredData();
+                    let pageIndex = 5;
+
+                }
+            }
+            console.log("Array: ", TypeList);
+        }
+
+
+        function RemoveFromCategorylist(checkbox) {
+            const value = checkbox.value;
+            if (checkbox.checked) {
+                if (!CategoryList.includes(value)) {
+                    CategoryList.push(value);
+                    console.log("Array'e eklendi: " + value);
+                    GetFilteredData();
+                    let pageIndex = 5;
+
+                }
+            } else {
+                const index = CategoryList.indexOf(value);
+                if (index !== -1) {
+                    CategoryList.splice(index, 1);
+                    console.log("Array'den çıkarıldı: " + value);
+                    GetFilteredData();
+                    let pageIndex = 5;
+
+                }
+            }
+            console.log("Array: ", CategoryList);
+        }
+        //lds - ring
+
+        function GetFilteredData() {
+            var ldsring = document.getElementById("lds-ring");
+        
+            ldsring.style.visibility = "visible";
+
+
+
+            console.log("GET data TYPE arrayleri" + TypeList)
+            console.log("GET data  Category arrayleri " + CategoryList)
+            $.ajax({
+                url: "/Home/GetMoreData",
+                data: { pageIndex: 0, categories: CategoryList, postTypes: TypeList },
+                type: "POST",
+                success: function (response) {
+                   
+                    console.log(response);
+
+                    $('#postSection').html("");
+                    $('#postSection').html(response);
+
+
+
+                    ldsring.style.visibility = "hidden";
+                   
+                    console.log(pageIndex);
+                },
+                error: function (xhr, status, error) {
+                    console.log(error);
+                }
+            });
+        }
+
+
+
+
+
+
+
+        /*  SİYA HTEM CHECK*/
+
+
+
+
+
+
+        function getMoreData() {
+            var ldsgrid = document.getElementById("lds-grid");
+            ldsgrid.style.visibility = "visible";
+
+
+            const postTypes = []; // boş bir dizi oluşturun
+            const categories = [];
+            // form elemanını seçin ve içindeki checkbox elemanlarını alın
+            const Typecheckboxes = document.querySelectorAll('#TypeCheckBox');
+            const Categorycheckboxes = document.querySelectorAll('#CategoryCheckBox');
+
+
+            // checkbox elemanlarını döngü ile kontrol edin
+            Typecheckboxes.forEach((checkbox) => {
+                if (checkbox.checked) { // eğer checkbox seçiliyse
+                    postTypes.push(checkbox.value); // seçilen değeri diziye ekleyin
+                }
+            });
+
+            console.log(postTypes);
+
+
+            Categorycheckboxes.forEach((checkbox) => {
+                if (checkbox.checked) { // eğer checkbox seçiliyse
+                    categories.push(checkbox.value); // seçilen değeri diziye ekleyin
+                }
+            });
+
+            console.log("GET data TYPE arrayleri" + postTypes)
+            console.log("GET data  Category arrayleri " + categories)
+            $.ajax({
+                url: "/Home/GetMoreData",
+                data: { pageIndex: pageIndex, categories: categories, postTypes: postTypes },
+                type: "POST",
+                success: function (response) {
+                    // verileri işleme ve ekranda görüntüleme işlemleri burada yapılır
+
+
+                    $("#postSection").append(response);
+                    
+                    ldsgrid.style.visibility = "hidden";
+                
+                    pageIndex += 10;
+                    console.log(pageIndex);
+                    
+                },
+                error: function (xhr, status, error) {
+                    console.log(error);
+                }
+            });
+         
+        }
+
+
+        $(window).scroll(function () {
+            if ($(window).scrollTop() + $(window).height() == $(document).height()) {
+                getMoreData();
+            }
+        });
+
+    </script>
+
+
+
+
     <script>class VoiceRecorder {
             constructor() {
                 if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
@@ -392,5 +697,64 @@
         }
 
         window.voiceRecorder = new VoiceRecorder()</script>
+
+
+    <script>const submitAndReload = function () {
+            // Form verilerini topla
+            const formData = new FormData(document.getElementById("PostYukleFormId"));
+            const loader = document.getElementById("lds-roller");
+
+            document.addEventListener("mousedown", function (event) {
+                if (event.button === 0) { // sol tık
+                    event.preventDefault();
+                    event.stopPropagation();
+                    return false;
+                }
+            }, true);
+
+            // Ses dosyasını yükle
+            const audioSrc = document.getElementById('player').src;
+            if (audioSrc && audioSrc.trim() !== '') { // audioSrc boş değilse
+                const xhr = new XMLHttpRequest();
+                xhr.open("GET", audioSrc);
+                xhr.responseType = "blob";
+                xhr.onload = function () {
+                    const blobData = xhr.response;
+                    loader.style.visibility = "visible";
+
+                    // FormData nesnesine ekle
+                    formData.append("audiofile", blobData, "recording.mp3");
+
+                    // Form verilerini sunucuya gönder
+                    fetch("/Home/PostYukle", {
+                        method: "POST",
+                        body: formData
+                    })
+                        .then(() => {
+                            // Sunucudan yanıt alındıktan sonra sayfayı yenile
+                            location.reload();
+                        });
+                };
+                xhr.send();
+            } else {
+                // audioSrc boş ise yapılacak işlem
+                console.log("Ses dosyası yok");
+                // FormData nesnesine "audiofile" ekleme
+                formData.append("audiofile", null);
+                // Form verilerini sunucuya gönder
+                fetch("/Home/PostYukle", {
+                    method: "POST",
+                    body: formData
+                })
+                    .then(() => {
+                        // Sunucudan yanıt alındıktan sonra sayfayı yenile
+                        location.reload();
+                    });
+            }
+        };
+
+        document.getElementById("paylasbtn").addEventListener("click", submitAndReload); 
+
+    </script>
 
 </div>

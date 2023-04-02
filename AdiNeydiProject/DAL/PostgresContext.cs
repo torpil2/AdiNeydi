@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace AdiNeydiProject.DAL;
 
 public partial class PostgresContext : DbContext
 {
+
     public PostgresContext()
     {
+              
+
     }
 
     public PostgresContext(DbContextOptions<PostgresContext> options)
@@ -18,6 +22,8 @@ public partial class PostgresContext : DbContext
     public virtual DbSet<Audio> Audios { get; set; }
 
     public virtual DbSet<Category> Categories { get; set; }
+
+    public virtual DbSet<Comment> Comments { get; set; }
 
     public virtual DbSet<Like> Likes { get; set; }
 
@@ -31,9 +37,11 @@ public partial class PostgresContext : DbContext
 
     public virtual DbSet<UserType> UserTypes { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseNpgsql("Host=localhost;Database=adineydidb;Username=postgres;Password=0000");
+//     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+// #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+//         => optionsBuilder.UseNpgsql("Host=localhost;Database=adineydidb;Username=postgres;Password=0000");
+
+   
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -66,6 +74,23 @@ public partial class PostgresContext : DbContext
                 .IsFixedLength();
         });
 
+        modelBuilder.Entity<Comment>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("Comment_pkey");
+
+            entity.ToTable("Comment");
+
+            entity.Property(e => e.Id).UseIdentityAlwaysColumn();
+            entity.Property(e => e.CreatedTime)
+                .HasColumnType("timestamp without time zone")
+                .HasColumnName("Created_Time");
+            entity.Property(e => e.IpAddress).HasColumnName("Ip_Address");
+            entity.Property(e => e.PostId).HasColumnName("Post_ID");
+            entity.Property(e => e.RepliedCommentId).HasColumnName("RepliedComment_ID");
+            entity.Property(e => e.TrueComment).HasColumnName("trueComment");
+            entity.Property(e => e.UserId).HasColumnName("User_ID");
+        });
+
         modelBuilder.Entity<Like>(entity =>
         {
             entity.HasNoKey();
@@ -93,6 +118,9 @@ public partial class PostgresContext : DbContext
 
             entity.Property(e => e.Id).UseIdentityAlwaysColumn();
             entity.Property(e => e.CategoryId).HasColumnName("Category_ID");
+            entity.Property(e => e.CreatedTime)
+                .HasColumnType("timestamp without time zone")
+                .HasColumnName("Created_Time");
             entity.Property(e => e.IsApproved).HasColumnName("Is_Approved");
             entity.Property(e => e.Title)
                 .HasMaxLength(255)
@@ -118,6 +146,7 @@ public partial class PostgresContext : DbContext
             entity.HasKey(e => e.Id).HasName("Users_pkey");
 
             entity.Property(e => e.Id).UseIdentityAlwaysColumn();
+            entity.Property(e => e.CreatedTime).HasColumnName("Created_Time");
             entity.Property(e => e.Email)
                 .HasMaxLength(80)
                 .IsFixedLength();

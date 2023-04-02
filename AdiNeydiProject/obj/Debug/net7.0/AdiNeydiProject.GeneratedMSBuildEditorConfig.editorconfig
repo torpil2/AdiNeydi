@@ -20,8 +20,24 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9SZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/macbook/Documents/GitHub/AdiNeydi/AdiNeydiProject/Views/Admin/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWRtaW4vTG9naW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/macbook/Documents/GitHub/AdiNeydi/AdiNeydiProject/Views/Home/GetMoreData.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9HZXRNb3JlRGF0YS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/macbook/Documents/GitHub/AdiNeydi/AdiNeydiProject/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/macbook/Documents/GitHub/AdiNeydi/AdiNeydiProject/Views/Home/Postdetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qb3N0ZGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/macbook/Documents/GitHub/AdiNeydi/AdiNeydiProject/Views/Home/Userdetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Vc2VyZGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/macbook/Documents/GitHub/AdiNeydi/AdiNeydiProject/Views/Shared/_Layout.cshtml]

@@ -1,0 +1,115 @@
+@using AdiNeydiProject.DAL;
+@using Microsoft.AspNetCore.Http
+@using AdiNeydiProject.CustomClasses;
+@model dynamic
+@{
+    ViewData["Title"] = "Gönderi ";
+}
+
+<link rel="stylesheet" href="~/css/Productdetails.css" asp-append-version="true" />
+
+
+
+
+<!---main container for page---->
+
+<div class="jumbotron">
+    <div class="row">
+
+
+	<div class="card">
+        <a href="/Home/Userdetails/@Model.PostOwner.Id">
+		<img src="~/rootimages/avatarpic.jpeg" alt="">
+		<h4>@Model.PostOwner.UserName</h4>
+           </a>
+		<small>Puan : Eklenecek </small>
+     
+	</div>
+
+        <!----image with description---->
+        <div id="wrapper">
+            <img src="https://i.kinja-img.com/gawker-media/image/upload/s--w4U0YlPn--/c_scale,fl_progressive,q_80,w_800/ompdwnxfe8pdnf8otyqm.jpg" class="img-responsive center-block" alt="Hayao Miyazaki.jpg">
+        </div>
+
+        <!---Filmography-->
+        <!--block quote-->
+        <div class="container">
+            <hr>
+            <blockquote class="blockquote-reverse">
+
+                <p>@Model.Post.Description</p>
+                <hr>
+            </blockquote>
+        </div>
+        <!--link to wiki page-->
+
+    </div>
+    <div class="comment-section">
+
+            <div class="bg-light p-2">
+                <div class="d-flex flex-row align-items-start">
+                    <form id="CommentForm" action="/Home/Leavecomment/@Model.Post.Id"  method="post" >             @Html.AntiForgeryToken() </form>
+                <img class="rounded-circle" src="~/rootimages/avatarpic.jpeg" width="40">
+                <textarea form="CommentForm" name="CommentText" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                </div>
+                <div class="mt-2 text-right">
+                <button class="btn btn-primary btn-sm shadow-none" onclick="submitComment()" type="button">Post comment</button>
+                </div>
+                
+            </div>
+
+            <div class="review">
+                <div class="comment-section">
+
+                    @foreach (Comment comm in Model.CommentList)
+                        {
+
+
+                    <div class="media media-review">
+                        <div class="comment-top">
+                            <span class="commentowner"> @foreach (User userscom in Model.UserModelList) { @if (userscom.Id == comm.UserId) { @userscom.UserName} } </span>
+                            <div class="media-user">
+
+                                <img src="~/rootimages/avatarpic.jpeg" alt="">
+
+
+                            </div>
+
+                        </div>
+                        <div class="media-body">
+                            <div class="M-flex">
+
+                            </div>
+                            <div class="description">@comm.Text</div>
+                        </div>
+                    </div>
+                        }
+
+                </div>
+
+            </div>
+
+
+    </div>  
+
+
+
+
+
+<script>
+    function submitComment() {
+  var form = document.getElementById("CommentForm");
+  form.submit();
+}
+
+</script>
+
+</div>
+
+  
+
+
+      
+ 
+
+

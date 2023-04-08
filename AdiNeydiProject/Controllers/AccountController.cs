@@ -36,21 +36,27 @@ namespace AdiNeydiProject.Controllers
             return View();
         }
 
-        
-        [ValidateAntiForgeryToken]
         [HttpPost]
         public async Task<IActionResult> Login(string txtUserName, string txtPassword)
         {
 
             // PostgresContext db = new PostgresContext();
+            try
+            {
 
             string passwordform = txtPassword;
             byte[] salt = Encoding.ASCII.GetBytes("440355d96220b9aa3829a5816257140b"); // Tuzlama için rastgele bir değer belirleyin
             var rfc2898DeriveBytes = new Rfc2898DeriveBytes(txtPassword, salt, 10000); // 10000 iterasyonla hashleme yap
             byte[] LoginPasshash = rfc2898DeriveBytes.GetBytes(32);
-
+ 
             var userget = _database.Users.Where(x => x.UserName == txtUserName && x.PasswordHash == LoginPasshash).FirstOrDefault();
-            var usertype = _database.UserTypes.Where(x => x.Id == userget.UserTypeId).FirstOrDefault();
+           
+            if (userget != null)
+            {
+
+            var usertype = _database.UserTypes.Where(x => x.Id == userget.UserTypeId).SingleOrDefault();
+           
+
               string UsertypeName;
             if(usertype==null)
             {
@@ -61,8 +67,9 @@ namespace AdiNeydiProject.Controllers
              UsertypeName = usertype.Name;
 
             }
-            if (userget != null)
-            {
+            userget.LastLogin = DateTime.Now;
+       
+
                 var newclaims = new Claim[]
                 {
                     new Claim(JwtRegisteredClaimNames.UniqueName,txtUserName),
@@ -70,21 +77,16 @@ namespace AdiNeydiProject.Controllers
                     new Claim(ClaimTypes.Name, userget.UserName),
                     new Claim ("UserMail",userget.Email),
                     new Claim("UserId",userget.Id.ToString()),                   
-                    new Claim("Role", usertype.Name ),
+                    new Claim("Role", UsertypeName.Trim() ),
                     
                     
                     //new Claim("UserType", usertype.Name)
-
-            
-       
-
             };
 
-
-                SecurityKey securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("evlerkiralik1234"));
+                SecurityKey securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("adineydicookieauth555"));
                 var token = new JwtSecurityToken(
-                    issuer: "evlerkiralik.com",
-                    audience: "evlerkiralik.com",
+                    issuer: "adineydi.com",
+                    audience: "adineydi.com",
                     claims: newclaims,
                     expires: DateTime.Now.AddHours(1),
                     signingCredentials: new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256
@@ -101,22 +103,22 @@ namespace AdiNeydiProject.Controllers
                 //HttpContext.SignInAsync(
                 //  CookieAuthenticationDefaults.AuthenticationScheme, principal, props).Wait();
                 var newtoken = new JwtSecurityTokenHandler().WriteToken(token);
-                ViewBag.UserId = userget.Email;
+               
+                _database.SaveChanges();
                 return RedirectToAction("Index", "Home");
             }
             else
             {
-
                 return RedirectToAction("Index", "Home");
             }
+            }
+             catch
+             {
+                return RedirectToAction("Index", "Home");
+             }
         }
 
-
-
-        public IActionResult Logout()
-        {
-            return View();
-        }
+   
          [ValidateAntiForgeryToken]
         [HttpPost]
         public async Task<IActionResult> LogoutAct()
@@ -127,7 +129,6 @@ namespace AdiNeydiProject.Controllers
 
             return RedirectToAction("Index", "Home");
         }
-
 
         [HttpPost]
         public async Task<IActionResult> Register(string FirstName , string LastName,string username, string email, string password)

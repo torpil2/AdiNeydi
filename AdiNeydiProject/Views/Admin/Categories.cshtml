@@ -1,0 +1,79 @@
+@using AdiNeydiProject.DAL;
+@using Microsoft.AspNetCore.Http
+@using AdiNeydiProject.CustomClasses;
+@model dynamic
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+
+
+<h3>Yeni Kategori EKle</h3>
+    <form action="/Admin/AddCategory" method="post">
+  <div class="form-group">
+    <label for="exampleInputEmail1">Kategori Ad</label>
+    <input type="text" class="form-control" name="categoryname" placeholder="Kategori Adı Gir..">
+  </div>
+
+ 
+  <button type="submit" class="btn btn-success btn-lg">Ekle</button>
+</form>
+
+
+<div class="table-title">
+    <h3>Kategoriler</h3>
+    </div>
+<table class="table-fill">
+<thead>
+<tr>
+<th class="text-left">Category Id</th>
+<th class="text-left">Category Name</th>
+<th class="text-left" > Post Sayısı  </th>
+<th class="text-center" >Sil</th>
+
+
+
+</tr>
+</thead>
+<tbody class="table-hover">
+
+  @foreach (Category category in Model.CategoryList)
+  {
+<tr>
+    <td>  @category.Id </td>
+
+    <td> @category.Name  </td>    
+
+    <td class="text-center"> 
+        
+     @{
+    int PostCount = 0;
+    foreach (Post ppost in Model.CategoryPostModel)
+    {
+        if (ppost.CategoryId == category.Id)
+        {
+            PostCount += 1;  
+        }
+    }
+    @Html.Raw(PostCount);  
+     } 
+
+    </td>
+
+    <td class="text-center"> <a href="/Admin/Categorydelete/@category.Id"><i class="fa-solid fa-trash-can"></i> &nbsp; Sil </a> </td>
+</tr>
+  }
+
+
+    </tr>
+
+    
+
+
+
+
+
+    </tbody>
+</table>

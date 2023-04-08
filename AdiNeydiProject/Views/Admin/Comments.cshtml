@@ -1,0 +1,197 @@
+@using AdiNeydiProject.DAL;
+@using Microsoft.AspNetCore.Http
+@using AdiNeydiProject.CustomClasses;
+@model dynamic
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+
+<div class="form-group">
+    <label for="exampleFormControlSelect1">Filtreleme Türü</label>
+    <select class="form-control" id="exampleFormControlSelect1" onchange="filterTable()">
+        <option>ID</option>
+        <option>Gönderi Description</option>
+        <option>Kategori</option>
+        <option>Tür</option>
+        <option>Oluşturan</option>
+        <option>Yorum Sayısı</option>
+        <option>Onay Durumu</option>
+
+    </select>
+</div>
+<input type="text" class="form-control" id="myInput"  placeholder="İçerik..">
+
+
+
+
+<div class="table-title" >
+    <h3>Yorumlar</h3>
+    </div>
+        <table id="myTable" class="table-fill" >
+<thead>
+<tr>
+<th class="text-center">ID</th>
+<th class="text-left">Yorum Text</th>
+<th class="text-left">True Comment</th>
+<th class="text-left">Post Id</th>
+<th class="text-left">Yorum Sahibi</th>
+<th class="text-left">Oluşturma zamanı</th>
+<th class="text-left">Atılan Ip Addresi</th>
+<th class="text-left">Yorumu Sil</th>
+
+</tr>
+</thead>
+<tbody class="table-hover values" >
+
+
+@{
+@foreach (Comment Comment in Model.Comments){
+
+
+
+<tr >
+<td class="text-center">@Comment.Id</td>
+<td class="text-left">
+
+ @if (Comment.Text.Length > 50)
+        {@(Comment.Text.Substring(0, 50)) @Html.Raw("...") }
+    else
+    {@Comment.Text}
+
+</td>
+
+
+
+<td class="text-left">
+  @Comment.TrueComment
+</td>
+
+
+
+<td class="text-left">
+    @foreach (Post post in Model.ComPostList)
+    {
+        @if(post.Id == Comment.PostId)
+        {<a href="/Home/Postdetails/@post.Id">
+            @if (post.Description.Length > 50)
+        {@(post.Description.Substring(0, 50)) @Html.Raw("...") }
+        else
+        {@post.Description}
+           </a>
+        }
+     
+    }
+      </td>
+
+
+<td class="text-left">
+@foreach (User postUser in Model.ComUserList)
+{
+    @if(postUser.Id == Comment.UserId)
+    {
+     <a href="/Home/Userdetails/@postUser.Id">   @postUser.UserName</a>
+    }
+    else
+    {
+      
+    }
+}
+
+</td>
+
+
+
+
+<td class="text-left"> @Comment.CreatedTime </td>
+
+<td class="text-center"> 
+    
+   
+@Comment.IpAddress
+    
+    
+       </td>
+
+
+<td class="text-left"> <a href="/Admin/Deletecomment/@Comment.Id"> <i class="fa-solid fa-trash"></i> </a></td>
+</tr>
+
+}
+}
+</tbody>
+</table>
+
+<script>
+function filterTable() {
+  var filterType = document.getElementById("exampleFormControlSelect1").value.toLowerCase();
+  var filterIndex = -1;
+  switch (filterType) {
+    case "id":
+      filterIndex = 0;
+      break;
+    case "gönderi description":
+      filterIndex = 1;
+      break;
+    case "kategori":
+      filterIndex = 2;
+      break;
+    case "tür":
+      filterIndex = 3;
+      break;
+    case "oluşturan":
+      filterIndex = 4;
+      break;
+    case "yorum sayısı":
+      filterIndex = 5;
+      break;
+    case "onay durumu":
+      filterIndex = 6;
+      break;
+    default:
+      break;
+  }
+  
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toLocaleLowerCase("tr-TR");
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[filterIndex];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toLocaleLowerCase("tr-TR").indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+
+document.getElementById("myInput").addEventListener("input", function() {
+  filterTable();
+});
+
+
+@* const gensim = require('gensim');
+
+// Örnek bir metin korpusu
+const sentences = [
+  ['bu', 'bir', 'örnek', 'cümledir'],
+  ['bu', 'da', 'bir', 'örnek', 'cümledir'],
+  ['bu', 'ise', 'başka', 'bir', 'örnek', 'cümledir'],
+  ['bir', 'cümle', 'daha', 'örnek', 'için']
+];
+
+// Kelime vektörü modelini eğit
+const model = new gensim.models.Word2Vec(sentences);
+
+// Benzer kelimeleri belirle
+const similarWords = model.mostSimilar('örnek');
+console.log(similarWords); *@
+</script>

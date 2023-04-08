@@ -19,7 +19,7 @@ public partial class User
 
     public bool? IsActive { get; set; }
 
-    public DateOnly? LastLogin { get; set; }
+    public DateTime? LastLogin { get; set; }
 
     public int? UserTypeId { get; set; }
 

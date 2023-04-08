@@ -29,7 +29,8 @@ foreach (Post item in Model.PostList)
                         <div class="card"  style="width: 100%;border-radius:10px;margin:0.5em;">
 
                                 <div class="card-header" style="background-color:#1977F2;color:white;">
-                    <span style="float: left;">  
+                    <span style="float: left;"> <img class="card-header-img" src="~/rootimages/avatarpic.jpeg" >
+
                         @foreach (UserIndex user in Model.UserList)
                         {
                             @if (user.UserID == item.UserId)

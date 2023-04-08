@@ -1,0 +1,213 @@
+@using AdiNeydiProject.DAL;
+@using Microsoft.AspNetCore.Http
+@using AdiNeydiProject.CustomClasses;
+@model dynamic
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+
+<div class="form-group">
+    <label for="exampleFormControlSelect1">Filtreleme Türü</label>
+    <select class="form-control" id="exampleFormControlSelect2" onchange="filterTable()">
+        <option>Id</option>
+        <option>Firstname</option>
+        <option>Lastname</option>
+        <option>Username</option>
+        <option>Email</option>
+        <option>Lastlogin</option>
+        <option>Yorum Sayısı</option>
+        <option>Telefon Onay</option>
+     
+        <option>Kayıt Tarihi</option>
+    </select>
+</div>
+<input type="text" class="form-control" id="myInput"  placeholder="İçerik..">
+
+
+
+
+
+
+<div class="table-title">
+    <h3>Son ÜYeler</h3>
+    </div>
+        <table  id="myTable" class="table-fill">
+<thead>
+<tr>
+<th class="text-left">Id</th>
+<th class="text-left">Firstname</th>
+<th class="text-left">Lastname</th>
+<th class="text-left">Username</th>
+<th class="text-left">Email</th>
+<th class="text-left">Lastlogin</th>
+<th class="text-center">Gönderi Sayısı</th>
+<th class="text-center"> Yorum Sayısı</th>
+<th class="text-left">Telefon Onay</th>
+<th class="text-left">Kayıt Tarihi</th>
+<th class="text-left"> Profile Git</th>
+<th class="text-left"> Kullanıcıyı Sil</th>
+
+
+</tr>
+</thead>
+<tbody class="table-hover">
+
+    @foreach (User user in Model.UserList)
+    {
+        <tr>
+    <td>
+    @user.Id
+    </td>
+    <td>
+    @user.FirstName
+    </td>
+     <td>
+    @user.LastName
+    </td>
+     <td>
+    @user.UserName
+    </td>
+
+    <td>
+    @user.Email
+    </td>
+
+    <td>
+    @user.LastLogin
+    </td>
+<td class="text-center">
+  @{
+    int PostCount = 0;
+    foreach (Post postt in Model.PostList)
+    {
+        if (postt.UserId == user.Id)
+        {
+            PostCount += 1;  
+        }
+    }
+    @Html.Raw(PostCount);  
+}  
+</td>
+
+    <td class="text-center"> 
+  @{
+    int CommentCount = 0;
+    foreach (Comment comm in Model.CommentList)
+    {
+        if (comm.UserId == user.Id)
+        {
+            CommentCount += 1;  
+        }
+    }
+    @Html.Raw(CommentCount);  
+} 
+        
+    </td>
+
+    <td>
+    @user.IsPhoneVerificated
+    </td>
+
+    <td>
+    @user.CreatedTime
+    </td>
+<td class="text-center"> <a href="/Home/Userdetails/@user.Id"> <i class="fa-solid fa-user"></i> </a> </td>
+
+<td class="text-center"> <a href="/Admin/UserDelete/@user.Id"><i class="fa-solid fa-trash-can"></i> &nbsp; Sil </a> </td>
+
+    </tr>
+
+    }
+
+
+
+
+
+    </tbody>
+</table>
+
+
+
+
+<script>
+function filterTable() {
+  var filterType = document.getElementById("exampleFormControlSelect2").value.toLowerCase();
+  var filterIndex = -1;
+  switch (filterType) {
+    case "id":
+      filterIndex = 0;
+      break;
+    case "firstname":
+      filterIndex = 1;
+      break;
+    case "lastname":
+      filterIndex = 2;
+      break;
+    case "username":
+      filterIndex = 3;
+      break;
+    case "email":
+      filterIndex = 4;
+      break;
+    case "lastlogin":
+      filterIndex = 5;
+      break;
+    case "yorum sayısı":
+      filterIndex = 6;
+      break;
+         case "telefon onay":
+      filterIndex = 7;
+      break;
+         case "kayıt tarihi":
+      filterIndex = 8;
+      break;
+    
+   
+    default:
+      break;
+  }
+  
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toLocaleLowerCase("tr-TR");
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[filterIndex];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toLocaleLowerCase("tr-TR").indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+
+document.getElementById("myInput").addEventListener("input", function() {
+  filterTable();
+});
+
+
+@* const gensim = require('gensim');
+
+// Örnek bir metin korpusu
+const sentences = [
+  ['bu', 'bir', 'örnek', 'cümledir'],
+  ['bu', 'da', 'bir', 'örnek', 'cümledir'],
+  ['bu', 'ise', 'başka', 'bir', 'örnek', 'cümledir'],
+  ['bir', 'cümle', 'daha', 'örnek', 'için']
+];
+
+// Kelime vektörü modelini eğit
+const model = new gensim.models.Word2Vec(sentences);
+
+// Benzer kelimeleri belirle
+const similarWords = model.mostSimilar('örnek');
+console.log(similarWords); *@
+</script>

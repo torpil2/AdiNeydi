@@ -1,17 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 namespace AdiNeydiProject.DAL;
 
 public partial class PostgresContext : DbContext
 {
-
     public PostgresContext()
     {
-              
-
     }
 
     public PostgresContext(DbContextOptions<PostgresContext> options)
@@ -37,12 +33,10 @@ public partial class PostgresContext : DbContext
 
     public virtual DbSet<UserType> UserTypes { get; set; }
 
-//     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-// #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-//         => optionsBuilder.UseNpgsql("Host=localhost;Database=adineydidb;Username=postgres;Password=0000");
-
-   
-
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseNpgsql("Server=localhost;Database=adineydidb;User Id=postgres;Password=0000;");
+// Server=185.87.253.114;Database=adineydidb;User Id=postgres;Password=12345678;
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Audio>(entity =>
@@ -155,6 +149,7 @@ public partial class PostgresContext : DbContext
                 .IsFixedLength();
             entity.Property(e => e.IsActive).HasColumnName("Is_Active");
             entity.Property(e => e.IsPhoneVerificated).HasColumnName("Is_Phone_Verificated");
+            entity.Property(e => e.LastLogin).HasColumnType("timestamp without time zone");
             entity.Property(e => e.LastName)
                 .HasMaxLength(50)
                 .IsFixedLength();
@@ -174,9 +169,6 @@ public partial class PostgresContext : DbContext
             entity.ToTable("UserType");
 
             entity.Property(e => e.Id).UseIdentityAlwaysColumn();
-            entity.Property(e => e.Name)
-                .HasMaxLength(255)
-                .IsFixedLength();
         });
 
         OnModelCreatingPartial(modelBuilder);

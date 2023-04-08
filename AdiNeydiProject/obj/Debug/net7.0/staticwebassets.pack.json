@@ -185,6 +185,10 @@
       "PackagePath": "staticwebassets/css/Admincss/Loginpage.css"
     },
     {
+      "Id": "/Users/macbook/Documents/GitHub/AdiNeydi/AdiNeydiProject/wwwroot/css/Admincss/adminlayout.css",
+      "PackagePath": "staticwebassets/css/Admincss/adminlayout.css"
+    },
+    {
       "Id": "/Users/macbook/Documents/GitHub/AdiNeydi/AdiNeydiProject/wwwroot/css/Productdetails.css",
       "PackagePath": "staticwebassets/css/Productdetails.css"
     },

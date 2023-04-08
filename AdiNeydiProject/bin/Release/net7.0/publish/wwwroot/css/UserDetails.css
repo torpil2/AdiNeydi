@@ -1,0 +1,147 @@
+﻿.main-body{
+  width: 100%;
+  margin: 0 auto !important;
+}
+
+.card {
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+  }
+  
+  .gutters-sm {
+  }
+ 
+  
+  h3 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+    color: rebeccapurple;
+  }
+  
+  h3:link,
+  h3:active,
+  h3:visited {
+    color: rebeccapurple;
+  }
+  
+  .gutters-sm > .col,
+  .gutters-sm > [class*="col-"] {
+    padding-right: 8px;
+    padding-left: 8px;
+  }
+  
+  .mb-3,
+  .my-3 {
+    margin-bottom: 1rem !important;
+  }
+  
+  .bg-gray-300 {
+    background-color: #e2e8f0;
+  }
+  
+  .h-100 {
+    height: 100% !important;
+  }
+  
+  .shadow-none {
+    box-shadow: none !important;
+  }
+  
+  /*   LIST STYLE  POSTS */
+  
+  @import url("https://fonts.googleapis.com/css?family=Montserrat:400,700");
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+  ol {
+    list-style: none;
+    counter-reset: list;
+    padding: 0 1rem;
+    max-height: 20rem;
+    overflow-x: scroll;
+  }
+  
+  li {
+    --stop: calc(100% / var(--length) * var(--i));
+    --l: 62%;
+    --l2: 88%;
+    --h: calc((var(--i) - 1) * (180 / var(--length)));
+    --c1: hsl(var(--h), 71%, var(--l));
+    --c2: hsl(var(--h), 71%, var(--l2));
+    position: relative;
+    counter-increment: list;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0.1rem 0.1rem 1.5rem rgba(0, 0, 0, 0.3);
+    border-radius: 0.25rem;
+    overflow: hidden;
+    background-color: white;
+  }
+  
+  li::before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 1rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: linear-gradient(to right, var(--c1) var(--stop), var(--c2) var(--stop));
+  }
+  
+  @media (min-width: 40em) {
+    li {
+      display: block;
+      margin: 0 auto;
+      padding: 0.5rem 1rem;
+    }
+  }
+  
+  .message-box {
+    text-align: right;
+    padding: 5px;
+    color: #545454;
+    width: 100%;
+    right: 0;
+    align-self: end;
+  }
+  
+  .clean {
+    background-color: #efefef;
+    border-top: 2px solid #dedede;
+    border-bottom: 2px solid #dedede;
+  }
+  
+  .info {
+    background-color: #f7fafd;
+    border-top: 2px solid #b5d3ff;
+    border-bottom: 2px solid #b5d3ff;
+    }
+    
+    .ok {
+    background-color: #d7f7c4;
+    border-top: 2px solid #82cb2f;
+    border-bottom: 2px solid #82cb2f;
+    }
+    
+    .alert {
+    background-color: #fef5be;
+    border-top: 2px solid #fdd425;
+    border-bottom: 2px solid #fdd425;
+    }
+    
+    .error {
+    background-color: #ffcdd1;
+    border-top: 2px solid #e10c0c;
+    border-bottom: 2px solid #e10c0c;
+    }

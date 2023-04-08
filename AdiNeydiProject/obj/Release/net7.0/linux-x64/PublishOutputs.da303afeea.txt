@@ -1,0 +1,4 @@
+/Users/macbook/Documents/GitHub/AdiNeydi/AdiNeydiProject/bin/Release/net7.0/linux-x64/publish/appsettings.Development.json
+/Users/macbook/Documents/GitHub/AdiNeydi/AdiNeydiProject/bin/Release/net7.0/linux-x64/publish/appsettings.json
+/Users/macbook/Documents/GitHub/AdiNeydi/AdiNeydiProject/bin/Release/net7.0/linux-x64/publish/AdiNeydiProject.pdb
+/Users/macbook/Documents/GitHub/AdiNeydi/AdiNeydiProject/bin/Release/net7.0/linux-x64/publish/AdiNeydiProject

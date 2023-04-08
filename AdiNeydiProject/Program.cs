@@ -9,6 +9,7 @@ using System.Configuration;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.HttpOverrides;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,7 +30,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 {
     options.Cookie.Name = "adineydi.Auth";
     options.LoginPath = "/Home/Index";
-    // options.AccessDeniedPath = "/Login/Index";
+     options.AccessDeniedPath = "/Home/Index";
 });
 
 builder.Services.AddAuthorization(options =>

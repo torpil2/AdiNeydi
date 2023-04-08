@@ -1,0 +1,207 @@
+@using AdiNeydiProject.DAL;
+@using Microsoft.AspNetCore.Http
+@using AdiNeydiProject.CustomClasses;
+@model dynamic
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+
+<div class="form-group">
+    <label for="exampleFormControlSelect1">Filtreleme Türü</label>
+    <select class="form-control" id="exampleFormControlSelect2" onchange="filterTable()">
+        <option>ID</option>
+        <option>Gönderi Description</option>
+        <option>Kategori</option>
+        <option>Tür</option>
+        <option>Oluşturan</option>
+        <option>Yorum Sayısı</option>
+        <option>Onay Durumu</option>
+    </select>
+</div>
+<input type="text" class="form-control" id="myInput"  placeholder="İçerik..">
+
+
+
+
+<div class="table-title" >
+    <h3>Son Gönderiler</h3>
+    </div>
+        <table id="myTable" class="table-fill" >
+<thead>
+<tr>
+<th class="text-center">ID</th>
+<th class="text-left">Gönderi Description</th>
+<th class="text-left">Kategori</th>
+<th class="text-left">Tür</th>
+<th class="text-left">Oluşturan</th>
+<th class="text-left">Oluşturma zamanı</th>
+<th class="text-left">Yorum Sayısı</th>
+<th class="text-left">Onay Durumu</th>
+<th class="text-left">Post Detay</th>
+<th class="text-left">Postu Sil</th>
+</tr>
+</thead>
+<tbody class="table-hover values" >
+
+
+@{
+@foreach (Post Post in Model.LastPosts){
+
+
+
+<tr >
+<td class="text-center">@Post.Id</td>
+<td class="text-left">
+
+ @if (Post.Description.Length > 50)
+        {@(Post.Description.Substring(0, 50)) @Html.Raw("...") }
+    else
+    {@Post.Description}
+
+</td>
+
+
+
+<td class="text-left">
+    @foreach (Category postCategory in Model.Kategoriler)
+    {
+        @if (postCategory.Id== Post.CategoryId)
+        {
+            @postCategory.Name
+        }
+    }
+</td>
+
+
+
+<td class="text-left">
+    @foreach (AdiNeydiProject.DAL.Type postType in Model.Types)
+    {
+        @if(postType.Id == Post.TypeId)
+        {
+            @postType.Name
+        }
+    }
+      </td>
+
+
+<td class="text-left">
+@foreach (User postUser in Model.LastPostsUserModel)
+{
+    @if(postUser.Id == Post.UserId)
+    {
+     <a href="/Home/Userdetails/@postUser.Id">   @postUser.UserName</a>
+    }
+}
+
+</td>
+
+
+
+
+<td class="text-left"> @Post.CreatedTime </td>
+
+<td class="text-center"> 
+    
+   
+         
+    
+@{
+    int CommentCount = 0;
+    foreach (Comment comm in Model.LastPostsCommentModel)
+    {
+        if (comm.PostId == Post.Id)
+        {
+            CommentCount += 1;
+        }
+    }
+    @Html.Raw(CommentCount);  
+}
+    
+    
+       </td>
+<td class="text-left">@Post.IsApproved</td>
+
+<td class="text-left"> <a href="/Home/Postdetails/@Post.Id"> <i class="fa-solid fa-circle-info"></i> &nbsp; Posta Git </a></td>
+<td class="text-center"><a href="/Admin/PostDelete/@Post.Id">  <i class="fa-solid fa-trash"></i> </a></td>
+</tr>
+
+}
+}
+</tbody>
+</table>
+
+<script>
+function filterTable() {
+  var filterType = document.getElementById("exampleFormControlSelect1").value.toLowerCase();
+  var filterIndex = -1;
+  switch (filterType) {
+    case "id":
+      filterIndex = 0;
+      break;
+    case "gönderi description":
+      filterIndex = 1;
+      break;
+    case "kategori":
+      filterIndex = 2;
+      break;
+    case "tür":
+      filterIndex = 3;
+      break;
+    case "oluşturan":
+      filterIndex = 4;
+      break;
+    case "yorum sayısı":
+      filterIndex = 5;
+      break;
+    case "onay durumu":
+      filterIndex = 6;
+      break;
+    default:
+      break;
+  }
+  
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toLocaleLowerCase("tr-TR");
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[filterIndex];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toLocaleLowerCase("tr-TR").indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+
+document.getElementById("myInput").addEventListener("input", function() {
+  filterTable();
+});
+
+
+@* const gensim = require('gensim');
+
+// Örnek bir metin korpusu
+const sentences = [
+  ['bu', 'bir', 'örnek', 'cümledir'],
+  ['bu', 'da', 'bir', 'örnek', 'cümledir'],
+  ['bu', 'ise', 'başka', 'bir', 'örnek', 'cümledir'],
+  ['bir', 'cümle', 'daha', 'örnek', 'için']
+];
+
+// Kelime vektörü modelini eğit
+const model = new gensim.models.Word2Vec(sentences);
+
+// Benzer kelimeleri belirle
+const similarWords = model.mostSimilar('örnek');
+console.log(similarWords); *@
+</script>

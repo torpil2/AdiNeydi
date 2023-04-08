@@ -1,0 +1,209 @@
+@using AdiNeydiProject.DAL;
+@using Microsoft.AspNetCore.Http
+@using AdiNeydiProject.CustomClasses;
+@model dynamic
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+<div class="table-title">
+    <h3>Son Gönderiler</h3>
+    </div>
+        <table class="table-fill">
+<thead>
+<tr>
+<th class="text-left">Gönderi Description</th>
+<th class="text-left">Kategori</th>
+<th class="text-left">Tür</th>
+<th class="text-left">Oluşturan</th>
+<th class="text-left">Oluşturma zamanı</th>
+<th class="text-left">Yorum Sayısı</th>
+<th class="text-left">Onay Durumu</th>
+<th class="text-left">Post Detay</th>
+<th class="text-left">Postu Sil</th>
+</tr>
+</thead>
+<tbody class="table-hover">
+    
+@{
+@foreach (Post Post in Model.LastPosts){
+
+
+
+<tr>
+<td class="text-left">
+
+ @if (Post.Description.Length > 50)
+        {@(Post.Description.Substring(0, 50)) @Html.Raw("...") }
+    else
+    {@Post.Description}
+
+</td>
+
+
+
+<td class="text-left">
+    @foreach (Category postCategory in Model.Kategoriler)
+    {
+        @if (postCategory.Id== Post.CategoryId)
+        {
+            @postCategory.Name
+        }
+    }
+</td>
+
+
+
+<td class="text-left">
+    @foreach (AdiNeydiProject.DAL.Type postType in Model.Types)
+    {
+        @if(postType.Id == Post.TypeId)
+        {
+            @postType.Name
+        }
+    }
+      </td>
+
+
+<td class="text-left">
+@foreach (User postUser in Model.LastPostsUserModel)
+{
+    @if(postUser.Id == Post.UserId)
+    {
+        @postUser.UserName
+    }
+}
+
+</td>
+
+
+
+
+<td class="text-left"> @Post.CreatedTime </td>
+
+<td class="text-center"> 
+    
+   
+         
+    
+@{
+    int CommentCount = 0;
+    foreach (Comment comm in Model.LastPostsCommentModel)
+    {
+        if (comm.PostId == Post.Id)
+        {
+            CommentCount += 1;
+        }
+    }
+    @Html.Raw(CommentCount);  
+}
+    
+    
+       </td>
+<td class="text-left">@Post.IsApproved</td>
+
+<td class="text-left"> <a href="/Home/Postdetails/@Post.Id"> <i class="fa-solid fa-circle-info"></i> &nbsp; Posta Git </a></td>
+<td class="text-center"><a href="/Admin/PostDelete/@Post.Id">  <i class="fa-solid fa-trash"></i> </a></td>
+</tr>
+
+}
+}
+</tbody>
+</table>
+
+
+<div class="table-title">
+    <h3>Son ÜYeler</h3>
+    </div>
+        <table class="table-fill">
+<thead>
+<tr>
+<th class="text-left">Firstname</th>
+<th class="text-left">Lastname</th>
+<th class="text-left">Username</th>
+<th class="text-left">Email</th>
+<th class="text-left">Lastlogin</th>
+<th class="text-center">Gönderi Sayısı</th>
+<th class="text-center"> Yorum Sayısı</th>
+<th class="text-left">Telefon Onay</th>
+<th class="text-left">Kayıt Tarihi</th>
+<th class="text-left"> Profile Git</th>
+<th class="text-left"> Kullanıcıyı Sil</th>
+
+
+</tr>
+</thead>
+<tbody class="table-hover">
+
+    @foreach (User user in Model.LastUsers)
+    {
+        <tr>
+    <td>
+    @user.FirstName
+    </td>
+     <td>
+    @user.LastName
+    </td>
+     <td>
+    @user.UserName
+    </td>
+
+    <td>
+    @user.Email
+    </td>
+
+    <td>
+    @user.LastLogin
+    </td>
+<td class="text-center">
+  @{
+    int PostCount = 0;
+    foreach (Post postt in Model.LastUserPostModel)
+    {
+        if (postt.UserId == user.Id)
+        {
+            PostCount += 1;  
+        }
+    }
+    @Html.Raw(PostCount);  
+}  
+</td>
+
+    <td class="text-center"> 
+  @{
+    int CommentCount = 0;
+    foreach (Comment comm in Model.LastUserCommentsModel)
+    {
+        if (comm.UserId == user.Id)
+        {
+            CommentCount += 1;  
+        }
+    }
+    @Html.Raw(CommentCount);  
+} 
+        
+    </td>
+
+    <td>
+    @user.IsPhoneVerificated
+    </td>
+
+    <td>
+    @user.CreatedTime
+    </td>
+<td class="text-center"> <a href="/Home/Userdetails/@user.Id"> <i class="fa-solid fa-user"></i> </a> </td>
+
+<td class="text-center"> <a href="/Admin/UserDelete/@user.Id"><i class="fa-solid fa-trash-can"></i> &nbsp; Sil </a> </td>
+
+    </tr>
+
+    }
+
+
+
+
+
+    </tbody>
+</table>

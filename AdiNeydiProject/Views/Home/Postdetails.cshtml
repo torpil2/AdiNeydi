@@ -18,17 +18,34 @@
 
 
 	<div class="card">
-        <a href="/Home/Userdetails/@Model.PostOwner.Id">
+        @if(Model.PostOwner != null)
+        { <a href="/Home/Userdetails/@Model.PostOwner.Id">
+
+       
+       
 		<img src="~/rootimages/avatarpic.jpeg" alt="">
-		<h4>@Model.PostOwner.UserName</h4>
+        @if(Model.PostOwner.UserName !=null)
+        {
+        <h4>@Model.PostOwner.UserName</h4>
+        }
+        else
+        {
+            <h4>Silinmiş Kullanıcı*</h4>
+        }
+		
            </a>
-		<small>Puan : Eklenecek </small>
+            }
+		<small>Puan : 0 </small>
      
 	</div>
 
         <!----image with description---->
         <div id="wrapper">
-            <img src="https://i.kinja-img.com/gawker-media/image/upload/s--w4U0YlPn--/c_scale,fl_progressive,q_80,w_800/ompdwnxfe8pdnf8otyqm.jpg" class="img-responsive center-block" alt="Hayao Miyazaki.jpg">
+            @if(Model.ResimURL!=null)
+            {
+            <img src="@Model.ResimURL" class="img-responsive center-block" alt="Hayao Miyazaki.jpg">
+
+            }
         </div>
 
         <!---Filmography-->
@@ -46,9 +63,9 @@
     </div>
     <div class="comment-section">
 
-            <div class="bg-light p-2">
+            <div class="bg-light p-2">  
                 <div class="d-flex flex-row align-items-start">
-                    <form id="CommentForm" action="/Home/Leavecomment/@Model.Post.Id"  method="post" >             @Html.AntiForgeryToken() </form>
+                    <form id="CommentForm" action="/Home/Leavecomment/@Model.Post.Id"  method="post" >         @Html.AntiForgeryToken() </form>
                 <img class="rounded-circle" src="~/rootimages/avatarpic.jpeg" width="40">
                 <textarea form="CommentForm" name="CommentText" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                 </div>

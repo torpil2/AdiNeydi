@@ -26,6 +26,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Hosting;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AdiNeydiProject.Controllers;
 
@@ -75,7 +76,10 @@ public class HomeController : Controller
 
            
          User foundUser = _database.Users.Where(x => x.Id == item.UserId).FirstOrDefault();
+        if(foundUser !=null)
+        {
 
+    
             UserIndex CustomUser = new UserIndex();
             CustomUser.UserID = foundUser.Id;
             CustomUser.FirstName = foundUser.FirstName;
@@ -97,7 +101,7 @@ public class HomeController : Controller
                 }
             }
 
-
+            }
             Picture postpicture = _database.Pictures.Where(x => x.PostId == item.Id).FirstOrDefault();
        if(postpicture!= null)
             {
@@ -158,6 +162,10 @@ public class HomeController : Controller
     [HttpPost]
     public IActionResult GetMoreData(int pageIndex, string[] categories, string[] postTypes)
     {
+        try
+        {
+
+      
         dynamic model = new ExpandoObject();
 
         model.PostList = new List<Post>();
@@ -227,7 +235,10 @@ public class HomeController : Controller
             if (item.UserId != null)
             {
                 User foundUser = _database.Users.Where(x => x.Id == item.UserId).FirstOrDefault();
+            if(foundUser != null)
+            {
 
+ 
                 UserIndex CustomUser = new UserIndex();
                 CustomUser.UserID = foundUser.Id;
                 CustomUser.FirstName = foundUser.FirstName;
@@ -247,7 +258,7 @@ public class HomeController : Controller
                     PassUsers.Add(CustomUser);
                 }
             }
-
+           }
 
             Picture postpicture = _database.Pictures.Where(x => x.PostId == item.Id).FirstOrDefault();
             if (postpicture != null)
@@ -300,12 +311,22 @@ public class HomeController : Controller
         //UploadFile();
         
         return PartialView(model);
+          }
+          catch
+          {
+            return PartialView();
+          }
     }
 
+    [Authorize]
     [ValidateAntiForgeryToken]
     [HttpPost]
     public async Task<IActionResult> PostYukle(string description,int categoryid,IFormFile file, IFormFile audiofile)
         {
+
+            try
+            {
+         
       
             Post newPost = new Post();
             newPost.Title = "Boş Title";
@@ -435,7 +456,12 @@ public class HomeController : Controller
 
         return RedirectToAction("Index");
 
-
+               
+            }
+            catch
+            {
+                return RedirectToAction("Index");
+            }
 
 
     }
@@ -443,11 +469,20 @@ public class HomeController : Controller
     [HttpGet]
     public IActionResult Userdetails(int ID)
     {
+        try
+        {
+
+      
         dynamic model = new ExpandoObject();
 
 
+        User Usser = _database.Users.Where(x=>x.Id == ID).SingleOrDefault();
+        if(Usser!=null)
+        {
 
-        model.UserList = _database.Users.Where(x => x.Id == ID).SingleOrDefault();  
+    
+        model.UserList = _database.Users.Where(x => x.Id == ID).SingleOrDefault(); 
+         
         model.UserPostList = _database.Posts.Where(x => x.UserId == ID).OrderBy(x => x.CreatedTime).ToList();
         model.CategoryList = _database.Categories.ToList();
         model.TypeList = _database.Types.ToList();
@@ -457,13 +492,65 @@ public class HomeController : Controller
       
         
         return View(model);
+            }
+            else
+            {
+            return RedirectToAction("Index","Home");
+
+            }
+          }
+          catch
+          {
+            return RedirectToAction("Index","Home");
+          }
     }
 
 
     [HttpGet]
     public IActionResult Postdetails(int ID)
     {
+        try
+        {
+
+   
         dynamic model = new ExpandoObject();
+
+
+        var accesskey = "AKIAROTU5G7VPCYJ3U5T";
+
+        var SecretKey = "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";
+
+        RegionEndpoint bucketregion = RegionEndpoint.EUNorth1;
+
+        var s3Client = new AmazonS3Client(accesskey, SecretKey, bucketregion);
+
+
+          Picture postpicture = _database.Pictures.Where(x => x.PostId == ID).FirstOrDefault();
+            if (postpicture != null)
+            {
+                if (postpicture.Path != null)
+                {
+                    var request = new GetPreSignedUrlRequest
+                    {
+                        BucketName = "adineydibucket",
+                        Key = postpicture.Path,
+                        Expires = DateTime.UtcNow.AddHours(1)
+                    };
+
+                    var url = s3Client.GetPreSignedURL(request);
+                    model.ResimURL = url;
+                 
+                }
+            }
+            else
+            {
+                model.ResimURL = null;
+            }
+
+
+
+
+
 
         Post relatedPost = _database.Posts.Where(x => x.Id == ID).SingleOrDefault();
         model.Post = relatedPost;
@@ -495,15 +582,22 @@ public class HomeController : Controller
      
         
         return View(model);
-
+          }
+          catch
+          {
+            return RedirectToAction("Index","Home");
+          }
     }
 
-
+    [Authorize]
     [ValidateAntiForgeryToken]
     [HttpPost]
     public IActionResult Leavecomment([FromRoute] int ID, string CommentText)
     {
-        
+        try
+        {
+
+       
         Post Post = _database.Posts.Where(x=>x.Id == ID).FirstOrDefault();
         
     var httpContext = HttpContext;
@@ -556,51 +650,13 @@ public class HomeController : Controller
         
 
         return RedirectToAction("Postdetails", "Home", new { ID = ID });
+         }
+         catch
+         {
+            return RedirectToAction("Postdetails", "Home", new { ID = ID });
+
+         }
     }
-
-    //public async void UploadFileAsync(IFormFile file,int postid)
-    //{
-
-    //    var accesskey = "AKIAROTU5G7VPCYJ3U5T";
-
-    //    var SecretKey = "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";
-
-    //    RegionEndpoint bucketregion = RegionEndpoint.EUNorth1;
-
-    //    var bucketName = "adineydibucket";
-
-    //    var s3Client = new AmazonS3Client(accesskey, SecretKey, bucketregion);
-
-    //    if (file.Length > 0)
-    //    {
-    //        var fileTransferUtility = new TransferUtility(s3Client);
-    //        var key = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-    //        var filePath = Path.Combine(Path.GetTempPath(), key);
-    //        using (var stream = new FileStream(filePath, FileMode.Create))
-    //        {
-    //            await file.CopyToAsync(stream);
-    //        }
-    //        var fileTransferUtilityRequest = new TransferUtilityUploadRequest
-    //        {
-    //            BucketName = bucketName,
-    //            FilePath = filePath,
-    //            Key = key,
-    //            ContentType = file.ContentType,
-    //            CannedACL = S3CannedACL.NoACL
-    //        };
-    //        await fileTransferUtility.UploadAsync(fileTransferUtilityRequest);
-    //        //return $"https://{bucketName}.s3.eu-north-1.amazonaws.com/{key}";
-    //        string filepath = $"https://{bucketName}.s3.eu-north-1.amazonaws.com/{key}";
-    //        int PostID = postid;
-    //        await UploadFile(filepath, postid);
-    //    }
-    //    else
-    //    {
-    //        throw new ArgumentException("File is empty");
-    //    }
-    //}
-
-
 
 
 

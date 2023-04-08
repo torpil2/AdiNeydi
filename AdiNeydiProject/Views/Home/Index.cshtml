@@ -223,14 +223,20 @@ foreach (Post item in Model.PostList)
                 
 
                         <div class="card"  style="width: 100%;border-radius:10px;margin:0.5em;">
-
+                           
                                 <div class="card-header" style="background-color:#1977F2;color:white;">
                     <span style="float: left;">  <img class="card-header-img" src="~/rootimages/avatarpic.jpeg" >
                         @foreach (UserIndex user in Model.UserList)
                         {
+                           
                             @if (user.UserID == item.UserId)
                             {
+                                
                                 @user.FirstName @user.LastName
+                            }
+                            else
+                            {
+                                @Html.Raw("Silinmiş Kullanıcı");
                             }
                         }
                     </span>
@@ -254,14 +260,14 @@ foreach (Post item in Model.PostList)
 
 
 
-
+    
                      @foreach (var resim in Model.ResimList)
                         {
                             if (resim.Key == item.Id)
                             {
-                                
-                            <img class="card-img-top" src="@resim.Value" style="width:60%;height:auto;margin: 0 auto;" alt="Card image cap">
-                                     
+                             
+                         <a href="/Home/Postdetails/@item.Id" style="text-align:center;">   <img class="card-img-top" src="@resim.Value" style="width:60%;height:auto;margin: 0 auto;" alt="Card image cap"></a>   
+                                 
                             }
                             else
                             {
@@ -299,7 +305,7 @@ foreach (Post item in Model.PostList)
                         {
                         }
                     }
-                                                        
+                                           
                                                         
                                                         </li>
 
@@ -310,29 +316,34 @@ foreach (Post item in Model.PostList)
                     
                     </ul>
                     </div>
+
+
                     </div>
-   
+       
 
                     }
                     else if(ResimCheck == false)
                     {
                         //SADECE METİN OLAN TEMPLATE KONULCAK
-                         <a href="/Home/Postdetails/@item.Id" class="link">
+                      
                 <div class="post">
 
                     <div class="post__top">
+                        
                         <img class="user__avatar post__avatar"
                              src="~/rootimages/avatarpic.jpeg"
                              alt="" />
                         <div class="post__topInfo">
                             @foreach (UserIndex user in Model.UserList)
-                            {
+                            {  
                                 @if (user.UserID == item.UserId)
-                                {
+                                { <a href="/Home/UserDetails/@user.UserID" class="link">
                                     <h3>@user.FirstName @user.LastName</h3>
+                                     </a>
                                 }
                             }
                         </div>
+                       
                         <div class="post__topDate">
                             <p>25 April at 20:30</p>
                             @if (item.CategoryId == 1)
@@ -354,7 +365,7 @@ foreach (Post item in Model.PostList)
 
 
                     <div class="post__bottom">
-
+   <a href="/Home/Postdetails/@item.Id" class="link" > 
                         <p>
                             @if (item.Description.Length > 150)
                             {@(item.Description.Substring(0, 150)) @Html.Raw("...") }
@@ -364,7 +375,7 @@ foreach (Post item in Model.PostList)
 
 
 
-
+   </a>
 
                     </div>
 
@@ -406,7 +417,7 @@ foreach (Post item in Model.PostList)
                         }
                     }
                 </div>
-            </a>
+         
                       
                    
                     }

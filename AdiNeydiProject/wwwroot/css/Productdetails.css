@@ -33,7 +33,10 @@ span {
     height: auto;
 
 }
-
+.bg-light
+{
+    border-radius: 10px;
+}
     #wrapper img {
         width: 50%;
         height: auto;

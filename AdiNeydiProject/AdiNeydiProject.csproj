@@ -51,4 +51,7 @@
   <ItemGroup>
     <Content Remove="wwwroot\rootimages\" />
   </ItemGroup>
+  <ItemGroup>
+  <Folder Include="wwwroot\" />
+</ItemGroup>
 </Project>

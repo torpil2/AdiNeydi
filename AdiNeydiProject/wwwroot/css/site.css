@@ -13,8 +13,8 @@ body {
  
 }
 .dark-mode {
-    background-color: #313638;
-    color: white;
+    background-color: #121212;
+    color: #FFFFFF;
 }
 hr {
     display: block;
@@ -27,6 +27,10 @@ hr {
 .card-header{
     border-radius: 10px !important;
 }
+.card-img-top
+{
+    border-radius: 5px !important;
+}
 .card-header-img
 {
     max-height: 40px;
@@ -34,23 +38,30 @@ hr {
     border-radius: 50%;
 }
 
-.post__bottom.dark-mode, .post__options.dark-mode, post__image.dark-mode , .card.dark-mode , .list-group-item.dark-mode , .card-text.dark-mode , .header.dark-mode{ 
-    background-color: #423f3e  !important;
-    color: white !important;
+.post__bottom.dark-mode, .post__options.dark-mode, post__image.dark-mode , .card.dark-mode , .list-group-item.dark-mode , .card-text.dark-mode  {
+    background-color: #424242  !important;
+    color: #FFFFFF !important;
     border-color: white !important;
+   
+
+}
+.header.dark-mode{ 
+    background-color: #3700B3 !important;
 }
 
 
-.post__top.dark-mode , .card-header.dark-mode
+.post__top.dark-mode , .card-header.dark-mode,.jumbotron.dark-mode
 {
-    color: white !important;
-    background-color:#351313 !important;
+    color: #FFFFFF !important;
+    background-color:#292929 !important;
+    box-shadow: 0 0 10px rgba(233, 233, 233, 0.2);
 }
 
 .postsection.dark-mode {
-    background-color: #313638 !important;
-    color: white !important;
+    background-color: #292929 !important;
+    color: #FFFFFF !important;
     border-color: orange !important;
+    box-shadow: 0 0 10px rgba(233, 233, 233, 0.2);
 }
 
 
@@ -76,6 +87,7 @@ hr {
 
 .header__left img {
     height: 40px;
+    border-radius: 10px;
 }
 
 .user__avatar {
@@ -335,6 +347,26 @@ body {
 
 
 a.link[href] {
+    text-decoration: none;
+    color: inherit;
+}
+a:link
+{
+    text-decoration: none;
+    color: inherit;
+}
+a:active
+{
+    text-decoration: none;
+    color: inherit;
+}
+a.link:visited
+{
+    text-decoration: none;
+    color: inherit;
+}
+a:link:hover
+{
     text-decoration: none;
     color: inherit;
 }
@@ -1157,7 +1189,7 @@ h1{
   .blog-card .blog-card-image img {
       width: 100%;
       height: 100%;
-      border-radius: 6px;
+      border-radius: 10px !important;
       pointer-events: none;
   }
   .blog-card .blog-table {

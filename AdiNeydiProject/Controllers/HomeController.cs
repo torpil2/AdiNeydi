@@ -56,9 +56,9 @@ public class HomeController : Controller
         model.TypeList = _database.Types.ToList();
         List<UserIndex> PassUsers = new List<UserIndex>();
 
-        var accesskey = "AKIAROTU5G7VPCYJ3U5T";
+        var accesskey = "**************";
 
-        var SecretKey = "miLJeM1XsaIkEINlEU5uP2bZ1BAlcthJ6IrPjsTT";
+        var SecretKey = ""**************";";
 
         RegionEndpoint bucketregion = RegionEndpoint.EUNorth1;
 
@@ -217,9 +217,9 @@ public class HomeController : Controller
 
         List<UserIndex> PassUsers = new List<UserIndex>();
 
-        var accesskey = "AKIAROTU5G7VPCYJ3U5T";
+        var accesskey = ""**************";";
 
-        var SecretKey = "miLJeM1XsaIkEINlEU5uP2bZ1BAlcthJ6IrPjsTT";
+        var SecretKey = ""**************";";
 
         RegionEndpoint bucketregion = RegionEndpoint.EUNorth1;
 
@@ -371,9 +371,9 @@ public class HomeController : Controller
         
   
   
-        var accesskey = "AKIAROTU5G7VPCYJ3U5T";
+        var accesskey = ""**************";";
 
-        var SecretKey = "miLJeM1XsaIkEINlEU5uP2bZ1BAlcthJ6IrPjsTT";
+        var SecretKey = ""**************";";
 
         RegionEndpoint bucketregion = RegionEndpoint.EUNorth1;
 
@@ -516,9 +516,9 @@ public class HomeController : Controller
         dynamic model = new ExpandoObject();
 
 
-        var accesskey = "AKIAROTU5G7VPCYJ3U5T";
+        var accesskey = ""**************";";
 
-        var SecretKey = "miLJeM1XsaIkEINlEU5uP2bZ1BAlcthJ6IrPjsTT";
+        var SecretKey = ""**************";";
 
         RegionEndpoint bucketregion = RegionEndpoint.EUNorth1;
 
